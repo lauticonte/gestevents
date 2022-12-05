@@ -1,0 +1,32 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-gesteventos-dev-14234-authRole",
+      "UnauthRoleArn": "arn:aws:iam::747175995704:role/amplify-gesteventos-dev-14234-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::747175995704:role/amplify-gesteventos-dev-14234-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-gesteventos-dev-14234-deployment",
+      "UnauthRoleName": "amplify-gesteventos-dev-14234-unauthRole",
+      "StackName": "amplify-gesteventos-dev-14234",
+      "StackId": "arn:aws:cloudformation:us-east-1:747175995704:stack/amplify-gesteventos-dev-14234/43a53c60-6ae9-11ed-8ddf-0e70561d9dad",
+      "AmplifyAppId": "d1v4suu4eq64y1"
+    },
+    "categories": {
+      "function": {
+        "gesteventoslambda": {
+          "deploymentBucketName": "amplify-gesteventos-dev-14234-deployment",
+          "s3Key": "amplify-builds/gesteventoslambda-66796773684e486e4d6f-build.zip"
+        }
+      },
+      "storage": {
+        "eventDB": {}
+      },
+      "api": {
+        "apievent": {}
+      },
+      "auth": {
+        "gesteventoseb1d98a2": {}
+      }
+    }
+  }
+}
