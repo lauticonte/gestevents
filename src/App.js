@@ -16,13 +16,14 @@ function App({ signOut, user }) {
     <div className="App">
       <header className="App-header">
       </header>
-      <CustomersContainer company={user.attributes['custom:company']}/>
-      <CreateCustomer company={user.attributes['custom:company']}/>
       {/* <NavigationBar/> */}
       <div style={styles.container}>
         <Heading level={1}>Hello {user.username}</Heading>
         <Button onClick={signOut}>Sign out</Button>
+        {console.log(user)}
       </div>
+      <CustomersContainer company={user.attributes['custom:company']}/>
+      <CreateCustomer company={user.attributes['custom:company']}/>
     </div>
   );
 }
