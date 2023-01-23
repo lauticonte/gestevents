@@ -3,10 +3,10 @@ import { API } from "aws-amplify";
 
 function CustomersContainer(company){
     const [customers, setCustomers] = useState([]);
-    useEffect(() => {
+    // useEffect(() => {
        
-        setCustomers(API.get("customersAPI", "customers/:alejoveronese2022@gmail.com"))
-    }, []);
+    //     setCustomers(API.get("customersAPI", "customers/:alejoveronese2022@gmail.com"))
+    // }, []);
         return (
             
             <div>
