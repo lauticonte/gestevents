@@ -8,12 +8,26 @@ const awsmobile = {
         {
             "tableName": "events-dev",
             "region": "us-east-1"
+        },
+        {
+            "tableName": "customers-dev",
+            "region": "us-east-1"
         }
     ],
     "aws_cloud_logic_custom": [
         {
             "name": "apievent",
             "endpoint": "https://z0003y0sv2.execute-api.us-east-1.amazonaws.com/dev",
+            "region": "us-east-1"
+        },
+        {
+            "name": "api0909f51a",
+            "endpoint": "https://qpwhl4j0c0.execute-api.us-east-1.amazonaws.com/dev",
+            "region": "us-east-1"
+        },
+        {
+            "name": "customersAPI",
+            "endpoint": "https://9dzzkob10l.execute-api.us-east-1.amazonaws.com/dev",
             "region": "us-east-1"
         }
     ],

@@ -2,14 +2,23 @@ import logo from './logo.svg';
 import { Amplify, API } from 'aws-amplify';
 import { withAuthenticator, Button, Heading } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
+import NavigationBar from './components/Navbar/Navbar';
+import aws_exports from './aws-exports';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import CreateCustomer from './components/Customers/Customers';
+import CustomersContainer from './components/CustomersContainer/CustomersContainer';
+Amplify.configure(aws_exports);
+//Setup router
+//Setup components
 
 function App({ signOut, user }) { 
-  
   return (
     <div className="App">
       <header className="App-header">
       </header>
-
+      <CustomersContainer company={user.attributes['custom:company']}/>
+      <CreateCustomer company={user.attributes['custom:company']}/>
+      {/* <NavigationBar/> */}
       <div style={styles.container}>
         <Heading level={1}>Hello {user.username}</Heading>
         <Button onClick={signOut}>Sign out</Button>
