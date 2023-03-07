@@ -39,23 +39,6 @@ export type AmplifyDependentResourcesAttributes = {
             "LambdaExecutionRole": "string"
         }
     },
-    "api": {
-        "apievent": {
-            "RootUrl": "string",
-            "ApiName": "string",
-            "ApiId": "string"
-        },
-        "api0909f51a": {
-            "RootUrl": "string",
-            "ApiName": "string",
-            "ApiId": "string"
-        },
-        "customersAPI": {
-            "RootUrl": "string",
-            "ApiName": "string",
-            "ApiId": "string"
-        }
-    },
     "auth": {
         "gesteventoseb1d98a2": {
             "IdentityPoolId": "string",

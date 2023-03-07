@@ -226,7 +226,21 @@ app.delete(path + '/object' + hashKeyPath + sortKeyPath, function(req, res) {
     }
   });
 });
-
+app.companyCustomers(companyCust, function(req,res) {
+  try {
+      var params = {
+          KeyConditionExpression: 'company = :company',
+          ExpressionAttributeValues: {
+              ':company': {'S': companyCust}
+          },
+          TableName: tableName
+      };
+      var result = dynamodb.query(params).promise()
+      console.log(JSON.stringify(result))
+  } catch (error) {
+      console.error(error);
+  }
+});
 app.listen(3000, function() {
   console.log("App started")
 });
