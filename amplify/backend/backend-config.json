@@ -68,7 +68,24 @@
       ]
     }
   },
-  "api": {},
+  "api": {
+    "gesteventos": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7
+            }
+          },
+          "additionalAuthenticationProviders": []
+        }
+      }
+    }
+  },
   "auth": {
     "gesteventoseb1d98a2": {
       "service": "Cognito",

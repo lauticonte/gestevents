@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Button, Col, Row } from 'react-bootstrap';
 import { API } from 'aws-amplify';
-//A client has a name, surname, email, phone, address, city, province, country, postal code, and a comment
+//A client has a name, lastname, email, phone, address, city, province, country, postal code, and a comment
 
 export default class CreateCustomer extends Component {
 
@@ -11,14 +11,14 @@ export default class CreateCustomer extends Component {
         super(props);
         this.state = {
             name: '',
-            surname: '',
+            lastname: '',
             email: '',
             phone: '',
             address: '',
             city: '',
             province: '',
             country: '',
-            postalCode: '',
+            postalcode: '',
             comment: ''
         };
         this.onChange = this.onChange.bind(this);
@@ -31,32 +31,49 @@ export default class CreateCustomer extends Component {
         e.preventDefault();
         const customer = {
             name: this.state.name,
-            surname: this.state.surname,
+            lastname: this.state.lastname,
             email: this.state.email,
             phone: this.state.phone,
             address: this.state.address,
             city: this.state.city,
             province: this.state.province,
             country: this.state.country,
-            postalCode: this.state.postalCode,
+            postalcode: this.state.postalcode,
             comment: this.state.comment,
             company: this.props.company
         };
-        API.post('customersAPI', '/customers', {
-            body:{
+        //Create customer in graphql
+        API.graphql({
+            query: createCustomer,
+            variables: { input: {
                 name: this.state.name,
-                surname: this.state.surname,
+                lastname: this.state.lastname,
                 email: this.state.email,
                 phone: this.state.phone,
                 address: this.state.address,
                 city: this.state.city,
                 province: this.state.province,
                 country: this.state.country,
-                postalCode: this.state.postalCode,
+                postalcode: this.state.postalcode,
                 comment: this.state.comment,
                 company: this.props.company
-            }
-        })
+                }}
+        });
+        // API.post('customersAPI', '/customers', {
+        //     body:{
+        //         name: this.state.name,
+        //         lastname: this.state.lastname,
+        //         email: this.state.email,
+        //         phone: this.state.phone,
+        //         address: this.state.address,
+        //         city: this.state.city,
+        //         province: this.state.province,
+        //         country: this.state.country,
+        //         postalcode: this.state.postalcode,
+        //         comment: this.state.comment,
+        //         company: this.props.company
+        //     }
+        // })
         console.log(customer);
     };
     render() {
@@ -79,7 +96,7 @@ export default class CreateCustomer extends Component {
                             />
                         </Col>
                     </Form.Group>
-                    <Form.Group as={Row} controlId="formHorizontalSurname">
+                    <Form.Group as={Row} controlId="formHorizontallastname">
                         <Form.Label column sm={2}>
                             Apellido
                         </Form.Label>
@@ -87,8 +104,8 @@ export default class CreateCustomer extends Component {
                             <Form.Control
                                 type="text"
                                 placeholder="Apellido"
-                                name="surname"
-                                value={this.state.surname}
+                                name="lastname"
+                                value={this.state.lastname}
                                 onChange={this.onChange}
                             />
                         </Col>
@@ -177,7 +194,7 @@ export default class CreateCustomer extends Component {
                             />
                         </Col>
                     </Form.Group>
-                    <Form.Group as={Row} controlId="formHorizontalPostalCode">
+                    <Form.Group as={Row} controlId="formHorizontalpostalcode">
                         <Form.Label column sm={2}>
                             Código Postal
                         </Form.Label>
@@ -185,8 +202,8 @@ export default class CreateCustomer extends Component {
                             <Form.Control
                                 type="text"
                                 placeholder="Código Postal"
-                                name="postalCode"
-                                value={this.state.postalCode}
+                                name="postalcode"
+                                value={this.state.postalcode}
                                 onChange={this.onChange}
                             />
                         </Col>

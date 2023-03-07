@@ -39,6 +39,13 @@ export type AmplifyDependentResourcesAttributes = {
             "LambdaExecutionRole": "string"
         }
     },
+    "api": {
+        "gesteventos": {
+            "GraphQLAPIKeyOutput": "string",
+            "GraphQLAPIIdOutput": "string",
+            "GraphQLAPIEndpointOutput": "string"
+        }
+    },
     "auth": {
         "gesteventoseb1d98a2": {
             "IdentityPoolId": "string",

@@ -32,6 +32,9 @@
       },
       "auth": {
         "gesteventoseb1d98a2": {}
+      },
+      "api": {
+        "gesteventos": {}
       }
     }
   }
