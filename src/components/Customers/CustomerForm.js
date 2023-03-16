@@ -2,86 +2,52 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Button, Col, Row } from 'react-bootstrap';
-import { API } from 'aws-amplify';
+import { API, graphqlOperation } from 'aws-amplify';
+import { useMutation } from '@apollo/react-hooks';
+import { createCustomer } from '../../graphql/mutations';
 //A client has a name, lastname, email, phone, address, city, province, country, postal code, and a comment
-
-export default class CreateCustomer extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: '',
-            lastname: '',
-            email: '',
-            phone: '',
-            address: '',
-            city: '',
-            province: '',
-            country: '',
-            postalcode: '',
-            comment: ''
-        };
-        this.onChange = this.onChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-    }
-    onChange(e) {
-        this.setState({ [e.target.name]: e.target.value });
-    }
-    onSubmit(e) {
-        e.preventDefault();
-        const customer = {
-            name: this.state.name,
-            lastname: this.state.lastname,
-            email: this.state.email,
-            phone: this.state.phone,
-            address: this.state.address,
-            city: this.state.city,
-            province: this.state.province,
-            country: this.state.country,
-            postalcode: this.state.postalcode,
-            comment: this.state.comment,
-            company: this.props.company
-        };
-        //Create customer in graphql
-        API.graphql({
-            query: createCustomer,
-            variables: { input: {
-                name: this.state.name,
-                lastname: this.state.lastname,
-                email: this.state.email,
-                phone: this.state.phone,
-                address: this.state.address,
-                city: this.state.city,
-                province: this.state.province,
-                country: this.state.country,
-                postalcode: this.state.postalcode,
-                comment: this.state.comment,
-                company: this.props.company
-                }}
-        });
-        // API.post('customersAPI', '/customers', {
-        //     body:{
-        //         name: this.state.name,
-        //         lastname: this.state.lastname,
-        //         email: this.state.email,
-        //         phone: this.state.phone,
-        //         address: this.state.address,
-        //         city: this.state.city,
-        //         province: this.state.province,
-        //         country: this.state.country,
-        //         postalcode: this.state.postalcode,
-        //         comment: this.state.comment,
-        //         company: this.props.company
-        //     }
-        // })
-        console.log(customer);
+function AddCustomer(customer){
+    console.log(customer)
+    const [CreateCustomer] = useMutation(createCustomer);
+    CreateCustomer({ variables: {
+        name: customer.name,
+        lastname: customer.lastname,
+        email: customer.email,
+        phone: customer.phone,
+        address: customer.address,
+        city: customer.city,
+        province: customer.province,
+        country: customer.country,
+        postalcode: customer.postalcode,
+        comment: customer.comment,
+        company: customer.company
+    } })
+    console.log("Se agrego al cliente a la db")
+const createCustomer = () => {
+    let name,lastname,email,phone,address,city,province,country,postalcode,comment,company;
+    const [CreateCustomer] = useMutation(createCustomer);
+    
     };
-    render() {
         return (
             <div>
                 
                 <h1>Crear Nuevo Cliente</h1>
-                <Form onSubmit={this.onSubmit}>
+                <Form onSubmit={e=>{
+                    e.preventDefault();
+                    CreateCustomer({variables:{
+                        name: name.value,
+                        lastname: lastname.value,
+                        email: email.value,
+                        phone: phone.value,
+                        address: address.value,
+                        city: city.value,
+                        province: province.value,
+                        country: country.value,
+                        postalcode: postalcode.value,
+                        comment: comment.value,
+                        company: "cloud"
+                    }})
+                }}>
                     <Form.Group as={Row} controlId="formHorizontalName">
                         <Form.Label column sm={2}>
                             Nombre
@@ -91,8 +57,7 @@ export default class CreateCustomer extends Component {
                                 type="text"
                                 placeholder="Nombre"
                                 name="name"
-                                value={this.state.name}
-                                onChange={this.onChange}
+                                ref={value => name = value}
                             />
                         </Col>
                     </Form.Group>
@@ -105,8 +70,7 @@ export default class CreateCustomer extends Component {
                                 type="text"
                                 placeholder="Apellido"
                                 name="lastname"
-                                value={this.state.lastname}
-                                onChange={this.onChange}
+                                ref={value => lastname = value}
                             />
                         </Col>
                     </Form.Group>
@@ -119,8 +83,7 @@ export default class CreateCustomer extends Component {
                                 type="email"
                                 placeholder="Email"
                                 name="email"
-                                value={this.state.email}
-                                onChange={this.onChange}
+                                ref={value => email = value}
                             />
                         </Col>
                     </Form.Group>
@@ -133,8 +96,7 @@ export default class CreateCustomer extends Component {
                                 type="text"
                                 placeholder="Teléfono"
                                 name="phone"
-                                value={this.state.phone}
-                                onChange={this.onChange}
+                                ref={value => phone = value}
                             />
                         </Col>
                     </Form.Group>
@@ -147,8 +109,7 @@ export default class CreateCustomer extends Component {
                                 type="text"
                                 placeholder="Dirección"
                                 name="address"
-                                value={this.state.address}
-                                onChange={this.onChange}
+                                ref={value => address = value}
                             />
                         </Col>
                     </Form.Group>
@@ -161,8 +122,7 @@ export default class CreateCustomer extends Component {
                                 type="text"
                                 placeholder="Ciudad"
                                 name="city"
-                                value={this.state.city}
-                                onChange={this.onChange}
+                                ref={value => city = value}
                             />
                         </Col>
                     </Form.Group>
@@ -175,8 +135,7 @@ export default class CreateCustomer extends Component {
                                 type="text"
                                 placeholder="Provincia"
                                 name="province"
-                                value={this.state.province}
-                                onChange={this.onChange}
+                                ref={value => province = value}
                             />
                         </Col>
                     </Form.Group>
@@ -189,8 +148,7 @@ export default class CreateCustomer extends Component {
                                 type="text"
                                 placeholder="País"
                                 name="country"
-                                value={this.state.country}
-                                onChange={this.onChange}
+                                ref={value => country = value}
                             />
                         </Col>
                     </Form.Group>
@@ -203,8 +161,7 @@ export default class CreateCustomer extends Component {
                                 type="text"
                                 placeholder="Código Postal"
                                 name="postalcode"
-                                value={this.state.postalcode}
-                                onChange={this.onChange}
+                                ref={value => postalcode = value}
                             />
                         </Col>
                     </Form.Group>
@@ -217,8 +174,7 @@ export default class CreateCustomer extends Component {
                                 type="text"
                                 placeholder="Comentario"
                                 name="comment"
-                                value={this.state.comment}
-                                onChange={this.onChange}
+                                ref={value => comment = value}
                             />
                         </Col>
                     </Form.Group>
@@ -231,4 +187,4 @@ export default class CreateCustomer extends Component {
             </div>
         );
     }
-}
+export default createCustomer;

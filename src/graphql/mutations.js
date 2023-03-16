@@ -2,37 +2,37 @@
 // this is an auto generated file. This will be overwritten
 
 export const createCustomer = /* GraphQL */ `
-  mutation CreateCustomer(
-    $input: CreateCustomerInput!
-    $condition: ModelCustomerConditionInput
-  ) {
-    createCustomer(input: $input, condition: $condition) {
-      id
-      name
-      lastname
-      email
-      phone
-      adress
-      city
-      province
-      country
-      postalcode
-      comment
-      company
-      events {
-        items {
-          id
-          title
-          createdAt
-          updatedAt
-          customerEventsId
-        }
-        nextToken
+mutation CreateCustomer(
+  $input: CreateCustomerInput!
+  $condition: ModelCustomerConditionInput
+) {
+  createCustomer(input: $input, condition: $condition) {
+    id
+    name
+    lastname
+    email
+    phone
+    adress
+    city
+    province
+    country
+    postalcode
+    comment
+    company
+    events {
+      items {
+        id
+        title
+        createdAt
+        updatedAt
+        customerEventsId
       }
-      createdAt
-      updatedAt
+      nextToken
     }
+    createdAt
+    updatedAt
   }
+}
 `;
 export const updateCustomer = /* GraphQL */ `
   mutation UpdateCustomer(

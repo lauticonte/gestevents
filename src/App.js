@@ -5,7 +5,7 @@ import '@aws-amplify/ui-react/styles.css';
 import NavigationBar from './components/Navbar/Navbar';
 import aws_exports from './aws-exports';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import CreateCustomer from './components/Customers/Customers';
+import CreateCustomer from './components/Customers/CustomersForm';
 import CustomersContainer from './components/CustomersContainer/CustomersContainer';
 Amplify.configure(aws_exports);
 //Setup router
@@ -20,10 +20,10 @@ function App({ signOut, user }) {
       <div style={styles.container}>
         <Heading level={1}>Hello {user.username}</Heading>
         <Button onClick={signOut}>Sign out</Button>
-        {console.log(user)}
       </div>
       <CustomersContainer company={user.attributes['custom:company']}/>
       <CreateCustomer company={user.attributes['custom:company']}/>
+      {/* <CreateCustomer/> */}
     </div>
   );
 }
