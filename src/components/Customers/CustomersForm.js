@@ -5,11 +5,12 @@ import { Form, Button, Col, Row } from 'react-bootstrap';
 import { API, graphqlOperation } from 'aws-amplify';
 import { useMutation } from '@apollo/react-hooks';
 import { createCustomer } from '../../graphql/mutations';
+
 //A client has a name, lastname, email, phone, address, city, province, country, postal code, and a comment
-const AddCustomer = async (customer)=>{
-    console.log(customer)
+const AddCustomer = async (newCustomer)=>{
+    console.log(newCustomer)
     try{await API.graphql(
-            graphqlOperation(createCustomer, { input: customer })
+            graphqlOperation(createCustomer, { input: newCustomer })
         );
     console.log("Se agrego al cliente a la db")
     }catch(error){
@@ -23,12 +24,12 @@ export default class CreateCustomer extends Component {
             name: '',
             lastname: '',
             email: '',
-            phone: '',
+            phone: "",
             address: '',
             city: '',
             province: '',
             country: '',
-            postalcode: '',
+            postalcode: "",
             comment: ''
         };
         this.onChange = this.onChange.bind(this);
@@ -44,7 +45,7 @@ export default class CreateCustomer extends Component {
             lastname: this.state.lastname,
             email: this.state.email,
             phone: this.state.phone,
-            address: this.state.address,
+            adress: this.state.address,
             city: this.state.city,
             province: this.state.province,
             country: this.state.country,
@@ -53,24 +54,6 @@ export default class CreateCustomer extends Component {
             company: this.props.company
         };
         AddCustomer(customer);
-        //Add customer to database
-        // console.log("Se agrego al cliente a la db");
-        //Create customer in graphql
-        // API.graphql(graphqlOperation(CreateCustomer,{ input: {
-        //         name: this.state.name,
-        //         lastname: this.state.lastname,
-        //         email: this.state.email,
-        //         phone: this.state.phone,
-        //         address: this.state.address,
-        //         city: this.state.city,
-        //         province: this.state.province,
-        //         country: this.state.country,
-        //         postalcode: this.state.postalcode,
-        //         comment: this.state.comment,
-        //         // company: this.props.company
-        //         }}));
-        
-        // console.log(customer);
     };
     render() {
         return (

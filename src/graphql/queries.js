@@ -31,6 +31,7 @@ export const getCustomer = /* GraphQL */ `
     }
   }
 `;
+
 export const listCustomers = /* GraphQL */ `
   query ListCustomers(
     $filter: ModelCustomerFilterInput

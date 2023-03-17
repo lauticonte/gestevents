@@ -1,117 +1,167 @@
 {
-  "storage": {
-    "eventDB": {
-      "service": "DynamoDB",
-      "providerPlugin": "awscloudformation"
-    },
-    "dynamof1ea6607": {
-      "service": "DynamoDB",
-      "providerPlugin": "awscloudformation"
-    }
-  },
-  "function": {
-    "gesteventoslambda": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "storage",
-          "resourceName": "eventDB",
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "attributeEnvMap": {
-            "Name": "TABLE_NAME",
-            "Arn": "TABLE_ARN"
-          }
-        }
-      ]
-    },
-    "gesteventos84be44ea": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "storage",
-          "resourceName": "dynamof1ea6607",
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "attributeEnvMap": {
-            "Name": "TABLE_NAME",
-            "Arn": "TABLE_ARN"
-          }
-        }
-      ]
-    },
-    "gestCustomers": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "storage",
-          "resourceName": "dynamof1ea6607",
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "attributeEnvMap": {
-            "Name": "TABLE_NAME",
-            "Arn": "TABLE_ARN"
-          }
-        }
-      ]
-    }
-  },
   "api": {
     "gesteventos": {
-      "service": "AppSync",
-      "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "output": {
         "authConfig": {
+          "additionalAuthenticationProviders": [],
           "defaultAuthentication": {
-            "authenticationType": "API_KEY",
             "apiKeyConfig": {
               "apiKeyExpirationDays": 7
-            }
-          },
-          "additionalAuthenticationProviders": []
+            },
+            "authenticationType": "API_KEY"
+          }
         }
-      }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync"
     }
   },
   "auth": {
     "gesteventoseb1d98a2": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
       "customAuth": false,
+      "dependsOn": [],
       "frontendAuthConfig": {
-        "socialProviders": [],
-        "usernameAttributes": [
-          "EMAIL"
-        ],
-        "signupAttributes": [
-          "EMAIL"
-        ],
-        "passwordProtectionSettings": {
-          "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": []
-        },
         "mfaConfiguration": "OFF",
         "mfaTypes": [
           "SMS"
         ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
         "verificationMechanisms": [
           "EMAIL"
         ]
-      }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
+    }
+  },
+  "function": {
+    "gestCustomers": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributeEnvMap": {
+            "Arn": "TABLE_ARN",
+            "Name": "TABLE_NAME"
+          },
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "storage",
+          "resourceName": "dynamof1ea6607"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "gesteventos84be44ea": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributeEnvMap": {
+            "Arn": "TABLE_ARN",
+            "Name": "TABLE_NAME"
+          },
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "storage",
+          "resourceName": "dynamof1ea6607"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "gesteventoslambda": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributeEnvMap": {
+            "Arn": "TABLE_ARN",
+            "Name": "TABLE_NAME"
+          },
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "storage",
+          "resourceName": "eventDB"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_gestCustomers_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "gestCustomers"
+        }
+      ]
+    },
+    "AMPLIFY_function_gestCustomers_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "gestCustomers"
+        }
+      ]
+    },
+    "AMPLIFY_function_gesteventos84be44ea_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "gesteventos84be44ea"
+        }
+      ]
+    },
+    "AMPLIFY_function_gesteventos84be44ea_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "gesteventos84be44ea"
+        }
+      ]
+    },
+    "AMPLIFY_function_gesteventoslambda_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "gesteventoslambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_gesteventoslambda_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "gesteventoslambda"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "dynamof1ea6607": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
+    "eventDB": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
     }
   }
 }

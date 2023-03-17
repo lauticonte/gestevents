@@ -15,7 +15,7 @@
       "function": {
         "gesteventoslambda": {
           "deploymentBucketName": "amplify-gesteventos-dev-14234-deployment",
-          "s3Key": "amplify-builds/gesteventoslambda-642b6835564751347a4a-build.zip"
+          "s3Key": "amplify-builds/gesteventoslambda-66796773684e486e4d6f-build.zip"
         },
         "gesteventos84be44ea": {
           "deploymentBucketName": "amplify-gesteventos-dev-14234-deployment",

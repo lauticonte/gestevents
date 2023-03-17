@@ -5,7 +5,13 @@ import CustomerCard from "../Customers/CustomerCard";
 const CustomersContainer= ({company})=> {
     const [customers, setCustomers] = useState([]);
     const Cust = async () => {
-        let customersData = await API.graphql(graphqlOperation(listCustomers));
+        let customersData = await API.graphql(graphqlOperation(listCustomers,
+            {
+                filter: {
+                    company: { eq: company }
+                }
+                
+            }));
         setCustomers(customersData.data.listCustomers.items)
     }
     useEffect(()=>{
@@ -16,12 +22,27 @@ const CustomersContainer= ({company})=> {
             
             <div>
                 <h1>Customers</h1>
+                <table className="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Dirección</th>
+                    <th scope="col">Ciudad</th>
+                    <th scope="col">Provincia</th>
+                    <th scope="col">País</th>
+                    <th scope="col">Código Postal</th>
+                    <th scope="col">Comentario</th>
+                </tr>
+            </thead>
                 {customers.map((customer) => (
-                    <div key={customer.id}>
-                        <CustomerCard customer={customer} />
-                    </div>
-                    // console.log(customer.email)
-                ))}
+                <tbody key={customer.id}>
+                  <CustomerCard customer={customer} />
+                </tbody>
+                        ))}
+        </table>
             </div>
         )
     }

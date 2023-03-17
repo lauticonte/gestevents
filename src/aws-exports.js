@@ -3,17 +3,6 @@
 
 const awsmobile = {
     "aws_project_region": "us-east-1",
-    "aws_dynamodb_all_tables_region": "us-east-1",
-    "aws_dynamodb_table_schemas": [
-        {
-            "tableName": "events-dev",
-            "region": "us-east-1"
-        },
-        {
-            "tableName": "customers-dev",
-            "region": "us-east-1"
-        }
-    ],
     "aws_appsync_graphqlEndpoint": "https://u2ijq3x74bb3tetkougiefi2uq.appsync-api.us-east-1.amazonaws.com/graphql",
     "aws_appsync_region": "us-east-1",
     "aws_appsync_authenticationType": "API_KEY",
@@ -40,6 +29,17 @@ const awsmobile = {
     },
     "aws_cognito_verification_mechanisms": [
         "EMAIL"
+    ],
+    "aws_dynamodb_all_tables_region": "us-east-1",
+    "aws_dynamodb_table_schemas": [
+        {
+            "tableName": "customers-dev",
+            "region": "us-east-1"
+        },
+        {
+            "tableName": "events-dev",
+            "region": "us-east-1"
+        }
     ]
 };
 
