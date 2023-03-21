@@ -2,10 +2,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { Amplify, API } from 'aws-amplify';
+import { withAuthenticator, Button, Heading } from '@aws-amplify/ui-react';
+import aws_exports from '../../aws-exports';
+Amplify.configure(aws_exports);
+
 //import { useAuth } from '../../contexts/AuthContext';
 //import { useHistory } from 'react-router-dom';
 
-export default function NavigationBar({ signOut }) {
+export default function NavigationBar({ signOut, user }) {
+
     // const { currentUser, logout } = useAuth();
     //const history = useHistory();
     
@@ -20,14 +26,14 @@ export default function NavigationBar({ signOut }) {
     
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        {/* <Navbar.Brand as={Link} to="/">
+        <Navbar.Brand as={Link} to="/">
             GestEvents
-        </Navbar.Brand> */}
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
-            {/* <NavDropdown title="Clientes" id="collasible-nav-dropdown">
-                <NavDropdown.Item as={Link} to="/createCustomer">
+            <NavDropdown title="Clientes" id="collasible-nav-dropdown">
+                <NavDropdown.Item as={Link} to={"/createCustomer"}>
                 Nuevo Cliente
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
@@ -50,7 +56,7 @@ export default function NavigationBar({ signOut }) {
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={signOut}>Log Out</NavDropdown.Item>
-            </NavDropdown> */}
+            </NavDropdown>
             </Nav>
         </Navbar.Collapse>
         </Navbar>

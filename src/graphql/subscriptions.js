@@ -19,7 +19,18 @@ export const onCreateCustomer = /* GraphQL */ `
       events {
         items {
           id
-          title
+          type
+          date
+          time
+          observation
+          qtyInv
+          qtyTables
+          total
+          downPayment
+          paymethod
+          qtyBankFee
+          qtyHoursRes
+          dateRegister
           createdAt
           updatedAt
           customerEventsId
@@ -49,7 +60,18 @@ export const onUpdateCustomer = /* GraphQL */ `
       events {
         items {
           id
-          title
+          type
+          date
+          time
+          observation
+          qtyInv
+          qtyTables
+          total
+          downPayment
+          paymethod
+          qtyBankFee
+          qtyHoursRes
+          dateRegister
           createdAt
           updatedAt
           customerEventsId
@@ -79,7 +101,18 @@ export const onDeleteCustomer = /* GraphQL */ `
       events {
         items {
           id
-          title
+          type
+          date
+          time
+          observation
+          qtyInv
+          qtyTables
+          total
+          downPayment
+          paymethod
+          qtyBankFee
+          qtyHoursRes
+          dateRegister
           createdAt
           updatedAt
           customerEventsId
@@ -95,7 +128,18 @@ export const onCreateEvent = /* GraphQL */ `
   subscription OnCreateEvent($filter: ModelSubscriptionEventFilterInput) {
     onCreateEvent(filter: $filter) {
       id
-      title
+      type
+      date
+      time
+      observation
+      qtyInv
+      qtyTables
+      total
+      downPayment
+      paymethod
+      qtyBankFee
+      qtyHoursRes
+      dateRegister
       customer {
         id
         name
@@ -125,7 +169,18 @@ export const onUpdateEvent = /* GraphQL */ `
   subscription OnUpdateEvent($filter: ModelSubscriptionEventFilterInput) {
     onUpdateEvent(filter: $filter) {
       id
-      title
+      type
+      date
+      time
+      observation
+      qtyInv
+      qtyTables
+      total
+      downPayment
+      paymethod
+      qtyBankFee
+      qtyHoursRes
+      dateRegister
       customer {
         id
         name
@@ -155,7 +210,18 @@ export const onDeleteEvent = /* GraphQL */ `
   subscription OnDeleteEvent($filter: ModelSubscriptionEventFilterInput) {
     onDeleteEvent(filter: $filter) {
       id
-      title
+      type
+      date
+      time
+      observation
+      qtyInv
+      qtyTables
+      total
+      downPayment
+      paymethod
+      qtyBankFee
+      qtyHoursRes
+      dateRegister
       customer {
         id
         name

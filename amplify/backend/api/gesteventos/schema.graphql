@@ -20,7 +20,18 @@ type Customer @model {
 
 type Event @model {
   id: ID!
-  title: String!
+  type: String!
+  date: String!
+  time: String!
+  observation: String!
+  qtyInv: Int!
+  qtyTables: Int!
+  total: Float!
+  downPayment: Float!
+  paymethod: String!
+  qtyBankFee: Int!
+  qtyHoursRes: Int!
+  dateRegister: String!
   customer: Customer @belongsTo
 }
 

@@ -2,37 +2,48 @@
 // this is an auto generated file. This will be overwritten
 
 export const createCustomer = /* GraphQL */ `
-mutation CreateCustomer(
-  $input: CreateCustomerInput!
-  $condition: ModelCustomerConditionInput
-) {
-  createCustomer(input: $input, condition: $condition) {
-    id
-    name
-    lastname
-    email
-    phone
-    adress
-    city
-    province
-    country
-    postalcode
-    comment
-    company
-    events {
-      items {
-        id
-        title
-        createdAt
-        updatedAt
-        customerEventsId
+  mutation CreateCustomer(
+    $input: CreateCustomerInput!
+    $condition: ModelCustomerConditionInput
+  ) {
+    createCustomer(input: $input, condition: $condition) {
+      id
+      name
+      lastname
+      email
+      phone
+      adress
+      city
+      province
+      country
+      postalcode
+      comment
+      company
+      events {
+        items {
+          id
+          type
+          date
+          time
+          observation
+          qtyInv
+          qtyTables
+          total
+          downPayment
+          paymethod
+          qtyBankFee
+          qtyHoursRes
+          dateRegister
+          createdAt
+          updatedAt
+          customerEventsId
+        }
+        nextToken
       }
-      nextToken
+      createdAt
+      updatedAt
     }
-    createdAt
-    updatedAt
   }
-}
 `;
 export const updateCustomer = /* GraphQL */ `
   mutation UpdateCustomer(
@@ -55,7 +66,18 @@ export const updateCustomer = /* GraphQL */ `
       events {
         items {
           id
-          title
+          type
+          date
+          time
+          observation
+          qtyInv
+          qtyTables
+          total
+          downPayment
+          paymethod
+          qtyBankFee
+          qtyHoursRes
+          dateRegister
           createdAt
           updatedAt
           customerEventsId
@@ -88,7 +110,18 @@ export const deleteCustomer = /* GraphQL */ `
       events {
         items {
           id
-          title
+          type
+          date
+          time
+          observation
+          qtyInv
+          qtyTables
+          total
+          downPayment
+          paymethod
+          qtyBankFee
+          qtyHoursRes
+          dateRegister
           createdAt
           updatedAt
           customerEventsId
@@ -107,7 +140,18 @@ export const createEvent = /* GraphQL */ `
   ) {
     createEvent(input: $input, condition: $condition) {
       id
-      title
+      type
+      date
+      time
+      observation
+      qtyInv
+      qtyTables
+      total
+      downPayment
+      paymethod
+      qtyBankFee
+      qtyHoursRes
+      dateRegister
       customer {
         id
         name
@@ -140,7 +184,18 @@ export const updateEvent = /* GraphQL */ `
   ) {
     updateEvent(input: $input, condition: $condition) {
       id
-      title
+      type
+      date
+      time
+      observation
+      qtyInv
+      qtyTables
+      total
+      downPayment
+      paymethod
+      qtyBankFee
+      qtyHoursRes
+      dateRegister
       customer {
         id
         name
@@ -173,7 +228,18 @@ export const deleteEvent = /* GraphQL */ `
   ) {
     deleteEvent(input: $input, condition: $condition) {
       id
-      title
+      type
+      date
+      time
+      observation
+      qtyInv
+      qtyTables
+      total
+      downPayment
+      paymethod
+      qtyBankFee
+      qtyHoursRes
+      dateRegister
       customer {
         id
         name

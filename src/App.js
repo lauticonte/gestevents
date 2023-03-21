@@ -4,11 +4,12 @@ import { withAuthenticator, Button, Heading } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import NavigationBar from './components/Navbar/Navbar';
 import aws_exports from './aws-exports';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
 import CreateCustomer from './components/Customers/CustomersForm';
 import CustomersContainer from './components/CustomersContainer/CustomersContainer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import CreateEvent from './components/Events/EventForm';
 Amplify.configure(aws_exports);
 //Setup router
 //Setup components
@@ -17,15 +18,17 @@ function App({ signOut, user }) {
   return (
     <div className="App">
       <header className="App-header">
+      <NavigationBar signOut={signOut} user={user}/>
       </header>
-      {/* <NavigationBar/> */}
       <div style={styles.container}>
-        <Heading level={1}>Hello {user.username}</Heading>
-        <Button onClick={signOut}>Sign out</Button>
+        {console.log(user)}
+        <Heading level={1}>Hello {user.attributes['email']} from {user.attributes['custom:company']}</Heading>
       </div>
-      <CreateCustomer company={user.attributes['custom:company']}/>
-      <CustomersContainer company={user.attributes['custom:company']}/>
-      {/* <CreateCustomer/> */}
+        <Routes>
+          <Route path="/createCustomer" element={<CreateCustomer company={user.attributes['custom:company']}/>} />
+          <Route path="/allCustomers" element={<CustomersContainer company={user.attributes['custom:company']}/>} />
+          <Route path="/createEvent" element={<CreateEvent />} />
+        </Routes>
     </div>
   );
 }

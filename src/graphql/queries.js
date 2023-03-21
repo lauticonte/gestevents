@@ -19,7 +19,18 @@ export const getCustomer = /* GraphQL */ `
       events {
         items {
           id
-          title
+          type
+          date
+          time
+          observation
+          qtyInv
+          qtyTables
+          total
+          downPayment
+          paymethod
+          qtyBankFee
+          qtyHoursRes
+          dateRegister
           createdAt
           updatedAt
           customerEventsId
@@ -31,7 +42,6 @@ export const getCustomer = /* GraphQL */ `
     }
   }
 `;
-
 export const listCustomers = /* GraphQL */ `
   query ListCustomers(
     $filter: ModelCustomerFilterInput
@@ -66,7 +76,18 @@ export const getEvent = /* GraphQL */ `
   query GetEvent($id: ID!) {
     getEvent(id: $id) {
       id
-      title
+      type
+      date
+      time
+      observation
+      qtyInv
+      qtyTables
+      total
+      downPayment
+      paymethod
+      qtyBankFee
+      qtyHoursRes
+      dateRegister
       customer {
         id
         name
@@ -101,7 +122,18 @@ export const listEvents = /* GraphQL */ `
     listEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        title
+        type
+        date
+        time
+        observation
+        qtyInv
+        qtyTables
+        total
+        downPayment
+        paymethod
+        qtyBankFee
+        qtyHoursRes
+        dateRegister
         customer {
           id
           name

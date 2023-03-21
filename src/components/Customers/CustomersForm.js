@@ -57,7 +57,7 @@ export default class CreateCustomer extends Component {
     };
     render() {
         return (
-            <div>
+            <div className="container">
                 
                 <h1>Crear Nuevo Cliente</h1>
                 <Form onSubmit={this.onSubmit}>
@@ -75,6 +75,7 @@ export default class CreateCustomer extends Component {
                             />
                         </Col>
                     </Form.Group>
+                    <br/>
                     <Form.Group as={Row} controlId="formHorizontallastname">
                         <Form.Label column sm={2}>
                             Apellido
@@ -89,6 +90,7 @@ export default class CreateCustomer extends Component {
                             />
                         </Col>
                     </Form.Group>
+                    <br/>
                     <Form.Group as={Row} controlId="formHorizontalEmail">
                         <Form.Label column sm={2}>
                             Email
@@ -103,6 +105,7 @@ export default class CreateCustomer extends Component {
                             />
                         </Col>
                     </Form.Group>
+                    <br/>
                     <Form.Group as={Row} controlId="formHorizontalPhone">
                         <Form.Label column sm={2}>
                             Teléfono
@@ -117,6 +120,7 @@ export default class CreateCustomer extends Component {
                             />
                         </Col>
                     </Form.Group>
+                    <br/>
                     <Form.Group as={Row} controlId="formHorizontalAddress">
                         <Form.Label column sm={2}>
                             Dirección
@@ -131,6 +135,7 @@ export default class CreateCustomer extends Component {
                             />
                         </Col>
                     </Form.Group>
+                    <br/>
                     <Form.Group as={Row} controlId="formHorizontalCity">
                         <Form.Label column sm={2}>
                             Ciudad
@@ -145,6 +150,7 @@ export default class CreateCustomer extends Component {
                             />
                         </Col>
                     </Form.Group>
+                    <br/>
                     <Form.Group as={Row} controlId="formHorizontalProvince">
                         <Form.Label column sm={2}>
                             Provincia
@@ -159,6 +165,7 @@ export default class CreateCustomer extends Component {
                             />
                         </Col>
                     </Form.Group>
+                    <br/>
                     <Form.Group as={Row} controlId="formHorizontalCountry">
                         <Form.Label column sm={2}>
                             País
@@ -173,6 +180,7 @@ export default class CreateCustomer extends Component {
                             />
                         </Col>
                     </Form.Group>
+                    <br/>
                     <Form.Group as={Row} controlId="formHorizontalpostalcode">
                         <Form.Label column sm={2}>
                             Código Postal
@@ -187,6 +195,7 @@ export default class CreateCustomer extends Component {
                             />
                         </Col>
                     </Form.Group>
+                    <br/>
                     <Form.Group as={Row} controlId="formHorizontalComment">
                         <Form.Label column sm={2}>
                             Comentario
@@ -201,6 +210,7 @@ export default class CreateCustomer extends Component {
                             />
                         </Col>
                     </Form.Group>
+                    <br/>
                     <Form.Group as={Row}>
                         <Col sm={{ span: 10, offset: 2 }}>
                             <Button type="submit">Crear</Button>

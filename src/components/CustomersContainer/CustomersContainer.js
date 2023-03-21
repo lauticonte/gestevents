@@ -20,7 +20,7 @@ const CustomersContainer= ({company})=> {
 , []);
         return (
             
-            <div>
+            <div className="container">
                 <h1>Customers</h1>
                 <table className="table table-striped">
             <thead>
