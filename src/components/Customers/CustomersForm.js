@@ -8,7 +8,6 @@ import { createCustomer } from '../../graphql/mutations';
 
 //A client has a name, lastname, email, phone, address, city, province, country, postal code, and a comment
 const AddCustomer = async (newCustomer)=>{
-    console.log(newCustomer)
     try{await API.graphql(
             graphqlOperation(createCustomer, { input: newCustomer })
         );
@@ -58,14 +57,13 @@ export default class CreateCustomer extends Component {
     render() {
         return (
             <div className="container">
-                
-                <h1>Crear Nuevo Cliente</h1>
+                {/* Display the form in columns */}
+
+                <h1>Crear Cliente</h1>
                 <Form onSubmit={this.onSubmit}>
-                    <Form.Group as={Row} controlId="formHorizontalName">
-                        <Form.Label column sm={2}>
-                            Nombre
-                        </Form.Label>
-                        <Col sm={10}>
+                    <Row className='mb-3'>
+                    <Form.Group controlId="formInlineName" className="col col-sm-3">
+                        <Form.Label>Nombre</Form.Label>
                             <Form.Control
                                 type="text"
                                 placeholder="Nombre"
@@ -73,14 +71,10 @@ export default class CreateCustomer extends Component {
                                 value={this.state.name}
                                 onChange={this.onChange}
                             />
-                        </Col>
                     </Form.Group>
                     <br/>
-                    <Form.Group as={Row} controlId="formHorizontallastname">
-                        <Form.Label column sm={2}>
-                            Apellido
-                        </Form.Label>
-                        <Col sm={10}>
+                    <Form.Group controlId="formInlinelastname" className="col col-sm-3">
+                        <Form.Label>Apellido</Form.Label>
                             <Form.Control
                                 type="text"
                                 placeholder="Apellido"
@@ -88,14 +82,10 @@ export default class CreateCustomer extends Component {
                                 value={this.state.lastname}
                                 onChange={this.onChange}
                             />
-                        </Col>
                     </Form.Group>
                     <br/>
-                    <Form.Group as={Row} controlId="formHorizontalEmail">
-                        <Form.Label column sm={2}>
-                            Email
-                        </Form.Label>
-                        <Col sm={10}>
+                    <Form.Group controlId="formInlineEmail" className="col col-sm-3">
+                        <Form.Label>Email</Form.Label>
                             <Form.Control
                                 type="email"
                                 placeholder="Email"
@@ -103,14 +93,10 @@ export default class CreateCustomer extends Component {
                                 value={this.state.email}
                                 onChange={this.onChange}
                             />
-                        </Col>
                     </Form.Group>
                     <br/>
-                    <Form.Group as={Row} controlId="formHorizontalPhone">
-                        <Form.Label column sm={2}>
-                            Teléfono
-                        </Form.Label>
-                        <Col sm={10}>
+                    <Form.Group controlId="formInlinePhone" className="col col-sm-3">
+                        <Form.Label>Teléfono</Form.Label>
                             <Form.Control
                                 type="text"
                                 placeholder="Teléfono"
@@ -118,14 +104,12 @@ export default class CreateCustomer extends Component {
                                 value={this.state.phone}
                                 onChange={this.onChange}
                             />
-                        </Col>
                     </Form.Group>
+                    </Row>
+                    <Row className='mb-3'>
                     <br/>
-                    <Form.Group as={Row} controlId="formHorizontalAddress">
-                        <Form.Label column sm={2}>
-                            Dirección
-                        </Form.Label>
-                        <Col sm={10}>
+                    <Form.Group controlId="formInlineAddress" className="col col-sm-3">
+                        <Form.Label>Dirección</Form.Label>
                             <Form.Control
                                 type="text"
                                 placeholder="Dirección"
@@ -133,14 +117,10 @@ export default class CreateCustomer extends Component {
                                 value={this.state.address}
                                 onChange={this.onChange}
                             />
-                        </Col>
                     </Form.Group>
                     <br/>
-                    <Form.Group as={Row} controlId="formHorizontalCity">
-                        <Form.Label column sm={2}>
-                            Ciudad
-                        </Form.Label>
-                        <Col sm={10}>
+                    <Form.Group controlId="formInlineCity" className="col col-sm-3">
+                        <Form.Label>Ciudad</Form.Label>
                             <Form.Control
                                 type="text"
                                 placeholder="Ciudad"
@@ -148,14 +128,10 @@ export default class CreateCustomer extends Component {
                                 value={this.state.city}
                                 onChange={this.onChange}
                             />
-                        </Col>
                     </Form.Group>
                     <br/>
-                    <Form.Group as={Row} controlId="formHorizontalProvince">
-                        <Form.Label column sm={2}>
-                            Provincia
-                        </Form.Label>
-                        <Col sm={10}>
+                    <Form.Group controlId="formInlineProvince" className="col col-sm-3">
+                        <Form.Label>Provincia</Form.Label>
                             <Form.Control
                                 type="text"
                                 placeholder="Provincia"
@@ -163,14 +139,10 @@ export default class CreateCustomer extends Component {
                                 value={this.state.province}
                                 onChange={this.onChange}
                             />
-                        </Col>
                     </Form.Group>
                     <br/>
-                    <Form.Group as={Row} controlId="formHorizontalCountry">
-                        <Form.Label column sm={2}>
-                            País
-                        </Form.Label>
-                        <Col sm={10}>
+                    <Form.Group controlId="formInlineCountry" className="col col-sm-3">
+                        <Form.Label>País</Form.Label>
                             <Form.Control
                                 type="text"
                                 placeholder="País"
@@ -178,14 +150,12 @@ export default class CreateCustomer extends Component {
                                 value={this.state.country}
                                 onChange={this.onChange}
                             />
-                        </Col>
                     </Form.Group>
+                    </Row>
+                    <Row className='mb-3'>
                     <br/>
-                    <Form.Group as={Row} controlId="formHorizontalpostalcode">
-                        <Form.Label column sm={2}>
-                            Código Postal
-                        </Form.Label>
-                        <Col sm={10}>
+                    <Form.Group controlId="formInlinepostalcode" className="col col-sm-3">
+                        <Form.Label>Código Postal</Form.Label>
                             <Form.Control
                                 type="text"
                                 placeholder="Código Postal"
@@ -193,14 +163,10 @@ export default class CreateCustomer extends Component {
                                 value={this.state.postalcode}
                                 onChange={this.onChange}
                             />
-                        </Col>
                     </Form.Group>
                     <br/>
-                    <Form.Group as={Row} controlId="formHorizontalComment">
-                        <Form.Label column sm={2}>
-                            Comentario
-                        </Form.Label>
-                        <Col sm={10}>
+                    <Form.Group controlId="formInlineComment" className="col col-sm-6">
+                        <Form.Label>Comentario</Form.Label>
                             <Form.Control
                                 type="text"
                                 placeholder="Comentario"
@@ -208,13 +174,11 @@ export default class CreateCustomer extends Component {
                                 value={this.state.comment}
                                 onChange={this.onChange}
                             />
-                        </Col>
                     </Form.Group>
                     <br/>
-                    <Form.Group as={Row}>
-                        <Col sm={{ span: 10, offset: 2 }}>
+                    </Row>
+                    <Form.Group>
                             <Button type="submit">Crear</Button>
-                        </Col>
                     </Form.Group>
                 </Form>
             </div>

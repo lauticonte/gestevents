@@ -21,7 +21,6 @@ function App({ signOut, user }) {
       <NavigationBar signOut={signOut} user={user}/>
       </header>
       <div style={styles.container}>
-        {console.log(user)}
         <Heading level={1}>Hello {user.attributes['email']} from {user.attributes['custom:company']}</Heading>
       </div>
         <Routes>

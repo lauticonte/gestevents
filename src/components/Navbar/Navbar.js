@@ -7,30 +7,16 @@ import { withAuthenticator, Button, Heading } from '@aws-amplify/ui-react';
 import aws_exports from '../../aws-exports';
 Amplify.configure(aws_exports);
 
-//import { useAuth } from '../../contexts/AuthContext';
-//import { useHistory } from 'react-router-dom';
 
 export default function NavigationBar({ signOut, user }) {
 
-    // const { currentUser, logout } = useAuth();
-    //const history = useHistory();
-    
-    // async function handleLogout() {
-    //     try {
-    //     await logout();
-    //     history.push('/login');
-    //     } catch {
-    //     console.log('Failed to log out');
-    //     }
-    // }
-    
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Navbar.Brand as={Link} to="/">
             GestEvents
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
+        <Navbar.Collapse className="justify-content-center" id="responsive-navbar-nav">
             <Nav className="mr-auto">
             <NavDropdown title="Clientes" id="collasible-nav-dropdown">
                 <NavDropdown.Item as={Link} to={"/createCustomer"}>

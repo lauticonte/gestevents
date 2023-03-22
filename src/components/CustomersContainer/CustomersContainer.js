@@ -17,7 +17,7 @@ const CustomersContainer= ({company})=> {
     useEffect(()=>{
         Cust()
     }
-, []);
+, [customers]);
         return (
             
             <div className="container">
