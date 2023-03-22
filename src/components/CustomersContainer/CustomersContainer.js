@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { API, graphqlOperation } from "aws-amplify";
 import { listCustomers } from "../../graphql/queries";
 import CustomerCard from "../Customers/CustomerCard";
+
 const CustomersContainer= ({company})=> {
     const [customers, setCustomers] = useState([]);
     const Cust = async () => {
@@ -43,7 +44,7 @@ const CustomersContainer= ({company})=> {
                 </tbody>
                         ))}
         </table>
-            </div>
+          </div>
         )
     }
     export default CustomersContainer;

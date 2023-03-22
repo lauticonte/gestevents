@@ -1,64 +1,30 @@
-//Form for new client
-import React, { Component } from 'react';
 import { Form, Button, Row } from 'react-bootstrap';
+import {useState} from 'react';
+import { updateCustomer } from '../../graphql/mutations';
 import { API, graphqlOperation } from 'aws-amplify';
-import { createCustomer } from '../../graphql/mutations';
 
-//A client has a name, lastname, email, phone, address, city, province, country, postal code, and a comment
-const AddCustomer = async (newCustomer)=>{
+const updCustomer = async (customerToUpd) => {
     try{await API.graphql(
-            graphqlOperation(createCustomer, { input: newCustomer })
-        );
-    console.log("Se agrego al cliente a la db")
+        graphqlOperation(updateCustomer, { input: customerToUpd })
+    );
+        console.log("Se modifico al cliente")
     }catch(error){
-        console.log("Error al agregar cliente a la db:",error)
+    console.log("Error al modificar al cliente",error)
     }
 }
-export default class CreateCustomer extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: '',
-            lastname: '',
-            email: '',
-            phone: "",
-            address: '',
-            city: '',
-            province: '',
-            country: '',
-            postalcode: "",
-            comment: ''
-        };
-        this.onChange = this.onChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+const CustomerEdit = ({customer}) =>{
+    const [newCustomer, setnewCustomer] = useState({['id']:customer.id})
+    
+    const onChange = (e) => {
+        setnewCustomer({...newCustomer, [e.target.name]: e.target.value})
     }
-    onChange(e) {
-        this.setState({ [e.target.name]: e.target.value });
-    }
-    onSubmit(e) {
+    const onSubmit = (e) => {
         e.preventDefault();
-        const customer = {
-            name: this.state.name,
-            lastname: this.state.lastname,
-            email: this.state.email,
-            phone: this.state.phone,
-            adress: this.state.address,
-            city: this.state.city,
-            province: this.state.province,
-            country: this.state.country,
-            postalcode: this.state.postalcode,
-            comment: this.state.comment,
-            company: this.props.company
-        };
-        AddCustomer(customer);
-    };
-    render() {
-        return (
-            <div className="container">
-                {/* Display the form in columns */}
+        updCustomer(newCustomer);
+    }
 
-                <h1>Crear Cliente</h1>
-                <Form onSubmit={this.onSubmit}>
+    return(
+    <Form onSubmit={(e)=>{onSubmit(e)}}>
                     <Row className='mb-3'>
                     <Form.Group controlId="formInlineName" className="col col-sm-3">
                         <Form.Label>Nombre</Form.Label>
@@ -66,8 +32,9 @@ export default class CreateCustomer extends Component {
                                 type="text"
                                 placeholder="Nombre"
                                 name="name"
-                                value={this.state.name}
-                                onChange={this.onChange}
+                                defaultValue={customer.name}
+                                onChange={(e)=>{onChange(e)}}
+                                
                             />
                     </Form.Group>
                     <br/>
@@ -77,8 +44,9 @@ export default class CreateCustomer extends Component {
                                 type="text"
                                 placeholder="Apellido"
                                 name="lastname"
-                                value={this.state.lastname}
-                                onChange={this.onChange}
+                                defaultValue={customer.lastname}
+                                onChange={(e)=>{onChange(e)}}
+                                
                             />
                     </Form.Group>
                     <br/>
@@ -88,8 +56,9 @@ export default class CreateCustomer extends Component {
                                 type="email"
                                 placeholder="Email"
                                 name="email"
-                                value={this.state.email}
-                                onChange={this.onChange}
+                                defaultValue={customer.email}
+                                onChange={(e)=>{onChange(e)}}
+                                
                             />
                     </Form.Group>
                     <br/>
@@ -99,8 +68,9 @@ export default class CreateCustomer extends Component {
                                 type="text"
                                 placeholder="Teléfono"
                                 name="phone"
-                                value={this.state.phone}
-                                onChange={this.onChange}
+                                defaultValue={customer.phone}
+                                onChange={(e)=>{onChange(e)}}
+                                
                             />
                     </Form.Group>
                     </Row>
@@ -111,9 +81,10 @@ export default class CreateCustomer extends Component {
                             <Form.Control
                                 type="text"
                                 placeholder="Dirección"
-                                name="address"
-                                value={this.state.address}
-                                onChange={this.onChange}
+                                name="adress"
+                                defaultValue={customer.adress}
+                                onChange={(e)=>{onChange(e)}}
+                                
                             />
                     </Form.Group>
                     <br/>
@@ -123,8 +94,9 @@ export default class CreateCustomer extends Component {
                                 type="text"
                                 placeholder="Ciudad"
                                 name="city"
-                                value={this.state.city}
-                                onChange={this.onChange}
+                                defaultValue={customer.city}
+                                onChange={(e)=>{onChange(e)}}
+                                
                             />
                     </Form.Group>
                     <br/>
@@ -134,8 +106,9 @@ export default class CreateCustomer extends Component {
                                 type="text"
                                 placeholder="Provincia"
                                 name="province"
-                                value={this.state.province}
-                                onChange={this.onChange}
+                                defaultValue={customer.province}
+                                onChange={(e)=>{onChange(e)}}
+                                
                             />
                     </Form.Group>
                     <br/>
@@ -145,8 +118,9 @@ export default class CreateCustomer extends Component {
                                 type="text"
                                 placeholder="País"
                                 name="country"
-                                value={this.state.country}
-                                onChange={this.onChange}
+                                defaultValue={customer.country}
+                                onChange={(e)=>{onChange(e)}}
+                                
                             />
                     </Form.Group>
                     </Row>
@@ -158,8 +132,9 @@ export default class CreateCustomer extends Component {
                                 type="text"
                                 placeholder="Código Postal"
                                 name="postalcode"
-                                value={this.state.postalcode}
-                                onChange={this.onChange}
+                                defaultValue={customer.postalcode}
+                                onChange={(e)=>{onChange(e)}}
+                                
                             />
                     </Form.Group>
                     <br/>
@@ -169,17 +144,17 @@ export default class CreateCustomer extends Component {
                                 type="text"
                                 placeholder="Comentario"
                                 name="comment"
-                                value={this.state.comment}
-                                onChange={this.onChange}
+                                defaultValue={customer.comment}
+                                onChange={(e)=>{onChange(e)}}
+                                
                             />
                     </Form.Group>
                     <br/>
                     </Row>
                     <Form.Group>
-                            <Button type="submit">Crear</Button>
+                            <Button type="submit">Editar</Button>
                     </Form.Group>
                 </Form>
-            </div>
-        );
-    }
+                )
 }
+export default CustomerEdit;

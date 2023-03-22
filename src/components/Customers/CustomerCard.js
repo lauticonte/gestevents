@@ -1,8 +1,13 @@
 //Create a Customer Card displaying his information
+import React, {useState} from "react";
 import { API, graphqlOperation } from "aws-amplify";
 import { deleteCustomer } from "../../graphql/mutations";
+import Button from 'react-bootstrap/Button';
+import Collapse from 'react-bootstrap/Collapse';
+import CustomerEdit from "./CustomerEdit";
 
 const CustomerCard = ({customer})=>{
+    const [open, setOpen] = useState(false);
     //Display the customer information in a booststrap table
     const delCustomer = async (customer_id) => {
         console.log("Delete customer", customer_id);
@@ -17,7 +22,7 @@ const CustomerCard = ({customer})=>{
     }
 
     return(
-        
+        <>
         <tr>
                     <td>{customer.name}</td>
                     <td>{customer.lastname}</td>
@@ -29,9 +34,24 @@ const CustomerCard = ({customer})=>{
                     <td>{customer.country}</td>
                     <td>{customer.postalcode}</td>
                     <td>{customer.comment}</td>
-        <td> <button className="btn btn-primary">Editar</button></td>
+        <td> <Button onClick={() => setOpen(!open)} aria-controls="example-collapse-text" aria-expanded={open}>Editar</Button></td>
         <td> <button className="btn btn-danger" onClick={()=>{delCustomer(customer.id)}}>Eliminar</button></td>
         </tr>
+        {/* Solo mostrar el tr del collapse si open es true */}
+        { open ? <tr>
+            <td colSpan="10">
+        <Collapse in={open}>
+            <div id="example-collapse-text">
+                <CustomerEdit customer={customer}/>
+            </div>
+          </Collapse>
+          </td>
+          </tr>: null}
+        
+        </>
+
+
+        
     )
 }
 
