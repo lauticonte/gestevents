@@ -1,8 +1,9 @@
 //Form for new Event
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Form, Button, Col, Row } from 'react-bootstrap';
 import { API, graphqlOperation } from 'aws-amplify';
 import { createEvent } from '../../graphql/mutations';
+import CustomerSelect from './CustomerSelect';
 
 //A Event has a type, date, time, observation, qtyInv, qtyTables, total, downPayment, paymethod, qtyBankFee, qtyHoursRes, dateRegister
 const AddEvent = async (newEvent)=>{
@@ -15,6 +16,7 @@ const AddEvent = async (newEvent)=>{
         console.log("Error al agregar evento a la db:",error)
     }
 }
+
 export default class CreateEvent extends Component {
     constructor(props) {
         super(props);
@@ -52,8 +54,9 @@ export default class CreateEvent extends Component {
             paymethod: this.state.paymethod,
             qtyBankFee: this.state.qtyBankFee,
             qtyHoursRes: this.state.qtyHoursRes,
-            dateRegister: this.state.dateRegistere,
-            customerEventsId: "24f4c655-712c-40c1-a6c1-0331cec107e6"
+            dateRegister: this.state.dateRegister,
+            company: this.props.company,
+            customerEventsId: this.state.customerEventsId
         };
         AddEvent(Event);
     };
@@ -215,7 +218,7 @@ export default class CreateEvent extends Component {
                     <br/>
                     <Form.Group className="col col-sm-3" controlId="formHorizontalQtyHoursRes">
                         <Form.Label  >
-                            Horas de reserva
+                            Horas reservadas
                         </Form.Label>
                             <Form.Control
                                 type="number"
@@ -246,8 +249,9 @@ export default class CreateEvent extends Component {
                             Cliente
                         </Form.Label>
                             <Form.Control as="select" name="customerEventsId" value={this.state.customerEventsId} onChange={this.onChange}>
-                                <option value="24f4c655-712c-40c1-a6c1-0331cec107e6">Cliente 1</option>
-                                <option value="24f4c655-712c-40c1-a6c1-0331cec107e6">Cliente 2</option>
+                                <option>Seleccione...</option>
+                                <CustomerSelect company={this.props.company}/>
+                                
                             
                             </Form.Control>
                     </Form.Group>
@@ -256,6 +260,7 @@ export default class CreateEvent extends Component {
                             <Button type="submit">Crear evento</Button>
                     </Form.Group>
                 </Form>
+                <br/>
             </div>
         );
     }

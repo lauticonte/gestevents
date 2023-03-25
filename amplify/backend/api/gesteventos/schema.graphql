@@ -32,6 +32,7 @@ type Event @model {
   qtyBankFee: Int!
   qtyHoursRes: Int!
   dateRegister: String!
+  company: String!
   customer: Customer @belongsTo
 }
 

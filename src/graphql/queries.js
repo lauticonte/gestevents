@@ -31,6 +31,7 @@ export const getCustomer = /* GraphQL */ `
           qtyBankFee
           qtyHoursRes
           dateRegister
+          company
           createdAt
           updatedAt
           customerEventsId
@@ -88,6 +89,7 @@ export const getEvent = /* GraphQL */ `
       qtyBankFee
       qtyHoursRes
       dateRegister
+      company
       customer {
         id
         name
@@ -134,6 +136,7 @@ export const listEvents = /* GraphQL */ `
         qtyBankFee
         qtyHoursRes
         dateRegister
+        company
         customer {
           id
           name

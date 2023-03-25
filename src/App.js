@@ -10,6 +10,7 @@ import CustomersContainer from './components/CustomersContainer/CustomersContain
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import CreateEvent from './components/Events/EventForm';
+import EventsContainer from './components/EventsContainer/EventsContainer';
 Amplify.configure(aws_exports);
 //Setup router
 //Setup components
@@ -26,7 +27,8 @@ function App({ signOut, user }) {
         <Routes>
           <Route path="/createCustomer" element={<CreateCustomer company={user.attributes['custom:company']}/>} />
           <Route path="/allCustomers" element={<CustomersContainer company={user.attributes['custom:company']}/>} />
-          <Route path="/createEvent" element={<CreateEvent />} />
+          <Route path="/createEvent" element={<CreateEvent company={user.attributes['custom:company']}/>} />
+          {/* <Route path="/allEvents" element={<EventsContainer company={user.attributes['custom:company']}/>} /> */}
         </Routes>
     </div>
   );

@@ -31,6 +31,7 @@ export const onCreateCustomer = /* GraphQL */ `
           qtyBankFee
           qtyHoursRes
           dateRegister
+          company
           createdAt
           updatedAt
           customerEventsId
@@ -72,6 +73,7 @@ export const onUpdateCustomer = /* GraphQL */ `
           qtyBankFee
           qtyHoursRes
           dateRegister
+          company
           createdAt
           updatedAt
           customerEventsId
@@ -113,6 +115,7 @@ export const onDeleteCustomer = /* GraphQL */ `
           qtyBankFee
           qtyHoursRes
           dateRegister
+          company
           createdAt
           updatedAt
           customerEventsId
@@ -140,6 +143,7 @@ export const onCreateEvent = /* GraphQL */ `
       qtyBankFee
       qtyHoursRes
       dateRegister
+      company
       customer {
         id
         name
@@ -181,6 +185,7 @@ export const onUpdateEvent = /* GraphQL */ `
       qtyBankFee
       qtyHoursRes
       dateRegister
+      company
       customer {
         id
         name
@@ -222,6 +227,7 @@ export const onDeleteEvent = /* GraphQL */ `
       qtyBankFee
       qtyHoursRes
       dateRegister
+      company
       customer {
         id
         name

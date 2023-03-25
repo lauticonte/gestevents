@@ -5,11 +5,26 @@ import { API, graphqlOperation } from 'aws-amplify';
 import { createCustomer } from '../../graphql/mutations';
 
 //A client has a name, lastname, email, phone, address, city, province, country, postal code, and a comment
+const cleanForm = () =>{
+    this.state = {
+        name: '',
+        lastname: '',
+        email: '',
+        phone: "",
+        address: '',
+        city: '',
+        province: '',
+        country: '',
+        postalcode: "",
+        comment: ''
+}
+}
 const AddCustomer = async (newCustomer)=>{
     try{await API.graphql(
             graphqlOperation(createCustomer, { input: newCustomer })
         );
-    console.log("Se agrego al cliente a la db")
+        console.log("Se agrego al cliente a la db")
+        cleanForm();
     }catch(error){
         console.log("Error al agregar cliente a la db:",error)
     }
@@ -179,6 +194,7 @@ export default class CreateCustomer extends Component {
                             <Button type="submit">Crear</Button>
                     </Form.Group>
                 </Form>
+                <br/>
             </div>
         );
     }
