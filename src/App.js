@@ -28,7 +28,7 @@ function App({ signOut, user }) {
           <Route path="/createCustomer" element={<CreateCustomer company={user.attributes['custom:company']}/>} />
           <Route path="/allCustomers" element={<CustomersContainer company={user.attributes['custom:company']}/>} />
           <Route path="/createEvent" element={<CreateEvent company={user.attributes['custom:company']}/>} />
-          {/* <Route path="/allEvents" element={<EventsContainer company={user.attributes['custom:company']}/>} /> */}
+          <Route path="/allEvents" element={<EventsContainer company={user.attributes['custom:company']}/>} />
         </Routes>
     </div>
   );

@@ -4,8 +4,8 @@ import { listEvents } from "../../graphql/queries";
 import EventCard from "../Events/EventCard";
 
 const EventsContainer= ({company})=> {
-    const [Events, setEvents] = useState([]);
-    const Cust = async () => {
+    const [events, setEvents] = useState([]);
+    const EventsList = async () => {
         let eventsData = await API.graphql(graphqlOperation(listEvents,
             {
                 filter: {
@@ -14,33 +14,37 @@ const EventsContainer= ({company})=> {
                 
             }));
         setEvents(eventsData.data.listEvents.items)
+        console.log(eventsData.data.listEvents.items)
     }
     useEffect(()=>{
-        Cust()
-    }
-, [Events]);
+        EventsList()
+    }, []);
         return (
             
             <div className="container">
-                <h1>Listado de reservas</h1>
+                <h1>Listado de eventos</h1>
                 <table className="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col">Correo</th>
-                    <th scope="col">Teléfono</th>
-                    <th scope="col">Dirección</th>
-                    <th scope="col">Ciudad</th>
-                    <th scope="col">Provincia</th>
-                    <th scope="col">País</th>
-                    <th scope="col">Código Postal</th>
-                    <th scope="col">Comentario</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Día</th>
+                    <th scope="col">Hora</th>
+                    <th scope="col">Cant Invitados</th>
+                    <th scope="col">Cant Mesas</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Anticipo</th>
+                    <th scope="col">Forma de pago</th>
+                    <th scope="col">Cuotas</th>
+                    <th scope="col">Horas reservadas</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Observación</th>
+
                 </tr>
             </thead>
-                {Events.map((Event) => (
+                {events.map((Event) => (
                 <tbody key={Event.id}>
                   <EventCard Event={Event} />
+                  {console.log(Event)}
                 </tbody>
                         ))}
         </table>

@@ -114,21 +114,6 @@ export default class CreateEvent extends Component {
                             />
                     </Form.Group>
                     <br/>
-                    <Form.Group className="col col-sm-3" controlId="formHorizontalObservation">
-                        <Form.Label  >
-                            Observación
-                        </Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Observación"
-                                name="observation"
-                                value={this.state.observation}
-                                onChange={this.onChange}
-                            />
-                    </Form.Group>
-                    </Row>
-                    <Row className='mb-3'>
-                    <br/>
                     <Form.Group className="col col-sm-3" controlId="formHorizontalQtyInv">
                         <Form.Label  >
                             Invitados
@@ -141,6 +126,8 @@ export default class CreateEvent extends Component {
                                 onChange={this.onChange}
                             />
                     </Form.Group>
+                    </Row>
+                    <Row className='mb-3'>
                     <br/>
                     <Form.Group className="col col-sm-3" controlId="formHorizontalQtyTables">
                         <Form.Label  >
@@ -180,8 +167,6 @@ export default class CreateEvent extends Component {
                                 onChange={this.onChange}
                             />
                     </Form.Group>
-                    </Row>
-                    <Row className='mb-3'>
                     <br/>
                     <Form.Group className="col col-sm-3" controlId="formHorizontalPaymethod">
                         <Form.Label  >
@@ -202,6 +187,9 @@ export default class CreateEvent extends Component {
                                 <option>Mercado Pago</option>
                             </Form.Control>
                     </Form.Group>
+                    </Row>
+                    <Row className='mb-3'>
+                  
                     <br/>
                     <Form.Group className="col col-sm-3" controlId="formHorizontalQtyBankFee">
                         <Form.Label  >
@@ -229,20 +217,18 @@ export default class CreateEvent extends Component {
                             />
                     </Form.Group>
                     <br/>
-                    <Form.Group className="col col-sm-3" controlId="formHorizontalDateRegister">
+                    <Form.Group className="col col-sm-3" controlId="formHorizontalObservation">
                         <Form.Label  >
-                            Fecha de registro
+                            Observación
                         </Form.Label>
                             <Form.Control
-                                type="date"
-                                placeholder="Fecha de registro"
-                                name="dateRegister"
-                                value={this.state.dateRegister}
+                                type="text"
+                                placeholder="Observación"
+                                name="observation"
+                                value={this.state.observation}
                                 onChange={this.onChange}
                             />
                     </Form.Group>
-                    </Row>
-                    <Row className='mb-3'>
                     <br/>
                     <Form.Group className="col col-sm-3" controlId="formHorizontalCustomerEventsId">
                         <Form.Label  >

@@ -27,13 +27,13 @@ export default function NavigationBar({ signOut, user }) {
                 Listado de Clientes
                 </NavDropdown.Item>
             </NavDropdown>
-            <NavDropdown title="Reservas" id="collasible-nav-dropdown">
+            <NavDropdown title="Eventos" id="collasible-nav-dropdown">
                 <NavDropdown.Item as={Link} to="/createEvent">
-                Nueva Reserva
+                Nuevo Evento
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item as={Link} to="/allEvents">
-                Listado de Reservas
+                Listado de Eventos
                 </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="Cuenta" id="collasible-nav-dropdown">
