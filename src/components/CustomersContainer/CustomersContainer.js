@@ -4,6 +4,7 @@ import { listCustomers } from "../../graphql/queries";
 import CustomerCard from "../Customers/CustomerCard";
 
 const CustomersContainer= ({company})=> {
+    const [customers, setCustomers] = useState([]);
     const Cust = async () => {
         let customersData = await API.graphql(graphqlOperation(listCustomers,
             {
@@ -15,7 +16,6 @@ const CustomersContainer= ({company})=> {
         setCustomers(customersData.data.listCustomers.items)
         console.log(customersData.data.listCustomers.items)
     }
-    const [customers, setCustomers] = useState([]);
     useEffect(()=>{
         Cust()
     }, []);

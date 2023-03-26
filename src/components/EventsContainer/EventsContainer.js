@@ -44,7 +44,6 @@ const EventsContainer= ({company})=> {
                 {events.map((Event) => (
                 <tbody key={Event.id}>
                   <EventCard Event={Event} />
-                  {console.log(Event)}
                 </tbody>
                         ))}
         </table>

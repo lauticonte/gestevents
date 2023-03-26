@@ -1,12 +1,22 @@
 //Create a Event Card displaying his information
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { API, graphqlOperation } from "aws-amplify";
 import { deleteEvent } from "../../graphql/mutations";
 import { listCustomers } from "../../graphql/queries";
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 // import EventEdit from "./EventEdit";
+const delEvent = async (event_id) => {
+    console.log("Delete event", event_id);
+    //delete the event using the event id and graphql operations
+    try{
+        await API.graphql(graphqlOperation(deleteEvent, { input: {id:event_id} }));
+        console.log("Se elimino al evento de la db")
 
+    }catch(error){
+        console.log("Error al eliminar evento de la db:",error)
+    }
+}
 const EventCard = ({Event})=>{
     const [open, setOpen] = useState(false);
     const [customer, setCustomer] = useState("");
@@ -19,21 +29,11 @@ const EventCard = ({Event})=>{
             }));
             setCustomer(customer.data.listCustomers.items[0].name + " " + customer.data.listCustomers.items[0].lastname)
     }
-    getCustomer(Event.customerEventsId)
-    console.log("El cliente es:",customer)
-    console.log("El evento es:",Event)
-    //Display the event information in a booststrap table
-    const delEvent = async (event_id) => {
-        console.log("Delete event", event_id);
-        //delete the event using the event id and graphql operations
-        try{
-            await API.graphql(graphqlOperation(deleteEvent, { input: {id:event_id} }));
-            console.log("Se elimino al cliente de la db")
+    useEffect(() => {
+        getCustomer(Event.customerEventsId)
+    },[])
 
-        }catch(error){
-            console.log("Error al eliminar cliente de la db:",error)
-        }
-    }
+    
 
     return(
         <>
@@ -51,20 +51,19 @@ const EventCard = ({Event})=>{
                     <td>{Event.observation}</td>
                     <td>{customer}</td>
 
-        {/* <td> <Button onClick={() => setOpen(!open)} aria-controls="example-collapse-text" aria-expanded={open}>Editar</Button></td> */}
-        {/* <td> <button className="btn btn-danger" onClick={()=>{delEvent(event.id)}}>Eliminar</button></td>
+        <td> <Button onClick={() => setOpen(!open)} aria-controls="example-collapse-text" aria-expanded={open}>Editar</Button></td>
+        <td> <button className="btn btn-danger" onClick={()=>{delEvent(Event.id)}}>Eliminar</button></td>
         </tr>
-        {/* Solo mostrar el tr del collapse si open es true */}
+        {/* {/* Solo mostrar el tr del collapse si open es true */}
         {/* { open ? <tr>
             <td colSpan="10">
         <Collapse in={open}>
             <div id="example-collapse-text">
-                <EventEdit event={event}/>
+                <EventEdit event={Event}/>
             </div>
           </Collapse>
           </td>
           </tr>: null} */}
-        </tr>
         
         </>
 
