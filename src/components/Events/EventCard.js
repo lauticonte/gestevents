@@ -5,7 +5,7 @@ import { deleteEvent } from "../../graphql/mutations";
 import { listCustomers } from "../../graphql/queries";
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
-// import EventEdit from "./EventEdit";
+import EventEdit from "./EventEdit";
 const delEvent = async (event_id) => {
     console.log("Delete event", event_id);
     //delete the event using the event id and graphql operations
@@ -48,22 +48,21 @@ const EventCard = ({Event})=>{
                     <td>{Event.paymethod}</td>
                     <td>{Event.qtyBankFee}</td>
                     <td>{Event.qtyHoursRes}</td>
-                    <td>{Event.observation}</td>
                     <td>{customer}</td>
+                    <td>{Event.observation}</td>
 
         <td> <Button onClick={() => setOpen(!open)} aria-controls="example-collapse-text" aria-expanded={open}>Editar</Button></td>
         <td> <button className="btn btn-danger" onClick={()=>{delEvent(Event.id)}}>Eliminar</button></td>
         </tr>
-        {/* {/* Solo mostrar el tr del collapse si open es true */}
-        {/* { open ? <tr>
+        { open ? <tr>
             <td colSpan="10">
         <Collapse in={open}>
             <div id="example-collapse-text">
-                <EventEdit event={Event}/>
+                <EventEdit event={Event} company={Event.company}/>
             </div>
           </Collapse>
           </td>
-          </tr>: null} */}
+          </tr>: null}
         
         </>
 

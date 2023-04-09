@@ -2,17 +2,18 @@ import { Form, Button, Row } from 'react-bootstrap';
 import {useState} from 'react';
 import { updateEvent } from '../../graphql/mutations';
 import { API, graphqlOperation } from 'aws-amplify';
+import CustomerSelect from './CustomerSelect';
 
 const updEvent = async (eventToUpd) => {
     try{await API.graphql(
         graphqlOperation(updateEvent, { input: eventToUpd })
     );
-        console.log("Se modifico al cliente")
+        console.log("Se modifico el evento")
     }catch(error){
-    console.log("Error al modificar al cliente",error)
+    console.log("Error al modificar el evento",error)
     }
 }
-const EventEdit = ({event}) =>{
+const EventEdit = ({event,company}) =>{
     const [newEvent, setnewEvent] = useState({['id']:event.id})
     
     const onChange = (e) => {
@@ -35,7 +36,7 @@ const EventEdit = ({event}) =>{
                                 defaultValue={event.type}
                                 onChange={(e)=>{onChange(e)}}
                                 
-                            />
+                            >
                             <option>Seleccione...</option>
                                 <option>Fiesta de 15</option>
                                 <option>Boda</option>
@@ -43,6 +44,7 @@ const EventEdit = ({event}) =>{
                                 <option>Bautismo</option>
                                 <option>Graduación</option>
                                 <option>Otro</option>
+                            </Form.Control>
                     </Form.Group>
                     <br/>
                     <Form.Group controlId="formHorizontalDate" className="col col-sm-3">
@@ -95,66 +97,98 @@ const EventEdit = ({event}) =>{
                             />
                     </Form.Group>
                     <br/>
-                    <Form.Group controlId="formInlineCity" className="col col-sm-3">
-                        <Form.Label>Ciudad</Form.Label>
+                    <Form.Group controlId="formHorizontalTotal" className="col col-sm-3">
+                        <Form.Label>Total</Form.Label>
                             <Form.Control
-                                type="text"
-                                placeholder="Ciudad"
-                                name="city"
-                                defaultValue={event.city}
+                                type="number"
+                                placeholder="Total"
+                                name="total"
+                                defaultValue={event.total}
                                 onChange={(e)=>{onChange(e)}}
                                 
                             />
                     </Form.Group>
                     <br/>
-                    <Form.Group controlId="formInlineProvince" className="col col-sm-3">
-                        <Form.Label>Provincia</Form.Label>
+                    <Form.Group controlId="formHorizontalDownPayment" className="col col-sm-3">
+                        <Form.Label>Anticipo</Form.Label>
                             <Form.Control
-                                type="text"
-                                placeholder="Provincia"
-                                name="province"
-                                defaultValue={event.province}
+                                type="number"
+                                placeholder="Anticipo"
+                                name="downPayment"
+                                defaultValue={event.downPayment}
                                 onChange={(e)=>{onChange(e)}}
                                 
                             />
                     </Form.Group>
                     <br/>
-                    <Form.Group controlId="formInlineCountry" className="col col-sm-3">
-                        <Form.Label>País</Form.Label>
+                    <Form.Group controlId="formHorizontalPaymethod" className="col col-sm-3">
+                        <Form.Label>Forma de Pago</Form.Label>
                             <Form.Control
-                                type="text"
-                                placeholder="País"
-                                name="country"
-                                defaultValue={event.country}
+                                as="select"
+                                placeholder="Forma de pago"
+                                name="paymethod"
+                                defaultValue={event.paymethod}
                                 onChange={(e)=>{onChange(e)}}
-                                
-                            />
+                            >
+                                <option>Seleccione...</option>
+                                <option>Efectivo</option>
+                                <option>Tarjeta de crédito</option>
+                                <option>Tarjeta de débito</option>
+                                <option>Transferencia</option>
+                                <option>Mercado Pago</option>
+                            </Form.Control>
                     </Form.Group>
                     </Row>
                     <Row className='mb-3'>
                     <br/>
-                    <Form.Group controlId="formInlinepostalcode" className="col col-sm-3">
-                        <Form.Label>Código Postal</Form.Label>
+                    <Form.Group controlId="formHorizontalQtyBankFee" className="col col-sm-3">
+                        <Form.Label>Cuotas</Form.Label>
                             <Form.Control
-                                type="text"
-                                placeholder="Código Postal"
-                                name="postalcode"
-                                defaultValue={event.postalcode}
+                                type="number"
+                                placeholder="Cuotas"
+                                name="qtyBankFee"
+                                defaultValue={event.qtyBankFee}
                                 onChange={(e)=>{onChange(e)}}
                                 
                             />
                     </Form.Group>
                     <br/>
-                    <Form.Group controlId="formInlineComment" className="col col-sm-6">
-                        <Form.Label>Comentario</Form.Label>
+                    <Form.Group controlId="formHorizontalQtyHoursRes" className="col col-sm-3">
+                        <Form.Label>Horas reservadas</Form.Label>
                             <Form.Control
-                                type="text"
-                                placeholder="Comentario"
-                                name="comment"
-                                defaultValue={event.comment}
+                                type="number"
+                                placeholder="Cantidad horas"
+                                name="qtyHoursRes"
+                                defaultValue={event.qtyHoursRes}
                                 onChange={(e)=>{onChange(e)}}
                                 
                             />
+                    </Form.Group>
+                    <br/>
+                    <Form.Group controlId="formHorizontalObservation" className="col col-sm-3">
+                        <Form.Label>Observación</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Observación"
+                                name="observation"
+                                defaultValue={event.observation}
+                                onChange={(e)=>{onChange(e)}}
+                                
+                            />
+                    </Form.Group>
+                    <br/>
+                    <Form.Group controlId="formHorizontalCustomerEventsId" className="col col-sm-3">
+                        <Form.Label>Cliente</Form.Label>
+                            <Form.Control
+                                as="select"
+                                placeholder="Cliente"
+                                name="customerEventsId"
+                                defaultValue={event.customerEventsId}
+                                onChange={(e)=>{onChange(e)}}
+                            >
+                            <option>Seleccione...</option>
+                            <CustomerSelect company={company}/>
+                            </Form.Control>
                     </Form.Group>
                     <br/>
                     </Row>

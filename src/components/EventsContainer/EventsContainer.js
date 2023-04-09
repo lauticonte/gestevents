@@ -5,6 +5,8 @@ import EventCard from "../Events/EventCard";
 
 const EventsContainer= ({company})=> {
     const [events, setEvents] = useState([]);
+    const [filteredList, setFilter] = useState([]);
+
     const EventsList = async () => {
         let eventsData = await API.graphql(graphqlOperation(listEvents,
             {
@@ -14,7 +16,17 @@ const EventsContainer= ({company})=> {
                 
             }));
         setEvents(eventsData.data.listEvents.items)
-        console.log(eventsData.data.listEvents.items)
+        setFilter(eventsData.data.listEvents.items)
+        console.log("Hola")
+    }
+
+    const filterEvent = (event) => {
+        const query = event.target.value
+        let eventsAct = [...events]
+        eventsAct = eventsAct.filter((Event) => {
+            return (Event['date']).indexOf(query.toLowerCase()) !== -1;
+        })
+        setFilter(eventsAct)
     }
     useEffect(()=>{
         EventsList()
@@ -23,6 +35,7 @@ const EventsContainer= ({company})=> {
             
             <div className="container">
                 <h1>Listado de eventos</h1>
+                <input className="" onChange={(e)=>{filterEvent(e)}} placeholder="Buscar por fecha" type="date" />
                 <table className="table table-striped">
             <thead>
                 <tr>
@@ -41,7 +54,7 @@ const EventsContainer= ({company})=> {
 
                 </tr>
             </thead>
-                {events.map((Event) => (
+                {filteredList.map((Event) => (
                 <tbody key={Event.id}>
                   <EventCard Event={Event} />
                 </tbody>

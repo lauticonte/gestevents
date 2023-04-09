@@ -58,6 +58,21 @@ export default class CreateEvent extends Component {
             company: this.props.company,
             customerEventsId: this.state.customerEventsId
         };
+        this.setState({
+            type: '',
+            date: '',
+            time: '',
+            observation: "",
+            qtyInv: '',
+            qtyTables: '',
+            total: '',
+            downPayment: '',
+            paymethod: '',
+            qtyBankFee: '',
+            qtyHoursRes: '',
+            dateRegister: ''
+        });
+        
         AddEvent(Event);
     };
     render() {

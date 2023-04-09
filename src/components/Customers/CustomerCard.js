@@ -9,18 +9,6 @@ import CustomerDelete from "./CustomerDelete";
 
 const CustomerCard = ({customer})=>{
     const [open, setOpen] = useState(false);
-    //Display the customer information in a booststrap table
-    // const delCustomer = async (customer_id) => {
-    //     console.log("Delete customer", customer_id);
-    //     //delete the customer using the customer id and graphql operations
-    //     try{
-    //         await API.graphql(graphqlOperation(deleteCustomer, { input: {id:customer_id} }));
-    //         console.log("Se elimino al cliente de la db")
-
-    //     }catch(error){
-    //         console.log("Error al eliminar cliente de la db:",error)
-    //     }
-    // }
 
     return(
         <>

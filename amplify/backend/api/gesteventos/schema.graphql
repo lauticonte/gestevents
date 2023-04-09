@@ -36,3 +36,11 @@ type Event @model {
   customer: Customer @belongsTo
 }
 
+type User @model {
+  id: ID!,
+  cognitoID: String!,
+  name: String!,
+  lastname: String!,
+  company: String!,
+  companycuit: String!
+}

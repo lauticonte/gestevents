@@ -2,8 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
-import { Amplify, API } from 'aws-amplify';
-import { withAuthenticator, Button, Heading } from '@aws-amplify/ui-react';
+import { Amplify } from 'aws-amplify';
 import aws_exports from '../../aws-exports';
 Amplify.configure(aws_exports);
 
@@ -37,7 +36,7 @@ export default function NavigationBar({ signOut, user }) {
                 </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="Cuenta" id="collasible-nav-dropdown">
-                <NavDropdown.Item as={Link} to="/update-profile">
+                <NavDropdown.Item as={Link} to="/userEdit">
                 Actualizar Información
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
