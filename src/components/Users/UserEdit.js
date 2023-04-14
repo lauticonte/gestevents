@@ -67,7 +67,7 @@ const UserEdit = ({id}) =>{
                     </Form.Group>
                     <br/>
                     <Form.Group controlId="formInlineCompany" className="col col-sm-3">
-                        <Form.Label>Email</Form.Label>
+                        <Form.Label>Organización</Form.Label>
                             <Form.Control
                                 type="text"
                                 placeholder="Nombre de la organización"

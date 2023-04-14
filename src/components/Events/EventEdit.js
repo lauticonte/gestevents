@@ -13,7 +13,7 @@ const updEvent = async (eventToUpd) => {
     console.log("Error al modificar el evento",error)
     }
 }
-const EventEdit = ({event,company}) =>{
+const EventEdit = ({event,company,onEdit}) =>{
     const [newEvent, setnewEvent] = useState({['id']:event.id})
     
     const onChange = (e) => {
@@ -22,6 +22,7 @@ const EventEdit = ({event,company}) =>{
     const onSubmit = (e) => {
         e.preventDefault();
         updEvent(newEvent);
+        onEdit(true)
     }
 
     return(

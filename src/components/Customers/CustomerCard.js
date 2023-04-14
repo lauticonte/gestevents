@@ -7,7 +7,7 @@ import Collapse from 'react-bootstrap/Collapse';
 import CustomerEdit from "./CustomerEdit";
 import CustomerDelete from "./CustomerDelete";
 
-const CustomerCard = ({customer})=>{
+const CustomerCard = ({customer,onEdit})=>{
     const [open, setOpen] = useState(false);
 
     return(
@@ -24,14 +24,14 @@ const CustomerCard = ({customer})=>{
                     <td>{customer.postalcode}</td>
                     <td>{customer.comment}</td>
         <td> <Button onClick={() => setOpen(!open)} aria-controls="example-collapse-text" aria-expanded={open}>Editar</Button></td>
-        <td> <button className="btn btn-danger" onClick={()=>{CustomerDelete(customer.id)}}>Eliminar</button></td>
+        <td> <button className="btn btn-danger" onClick={()=>{CustomerDelete(customer.id,onEdit)}}>Eliminar</button></td>
         </tr>
         {/* Solo mostrar el tr del collapse si open es true */}
         { open ? <tr>
             <td colSpan="10">
         <Collapse in={open}>
             <div id="example-collapse-text">
-                <CustomerEdit customer={customer}/>
+                <CustomerEdit customer={customer} onEdit={onEdit}/>
             </div>
           </Collapse>
           </td>

@@ -1,34 +1,42 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { API, graphqlOperation } from "aws-amplify";
 import { listCustomers } from "../../graphql/queries";
 import CustomerCard from "../Customers/CustomerCard";
 
-const CustomersContainer= ({company})=> {
-    const [customers, setCustomers] = useState([]);
-    const [filteredList, setFilter] = useState([]);
-    const Cust = async () => {
-        let customersData = await API.graphql(graphqlOperation(listCustomers,
-            {
-                filter: {
-                    company: { eq: company }
-                }
-                
-            }));
-        setCustomers(customersData.data.listCustomers.items)
-        setFilter(customersData.data.listCustomers.items)
-    }
-    
-    const filterCustomer = (event) => {
-        const query = event.target.value
-        let customersAct = [...customers]
-        customersAct = customersAct.filter((customer) => {
-            return (customer['name'] +" "+ customer['lastname']).toLowerCase().indexOf(query.toLowerCase()) !== -1;
-        })
-        setFilter(customersAct)
-    }
-    useEffect(()=>{
-        Cust()
-    }, []);
+const CustomersContainer = ({ company }) => {
+  const [customers, setCustomers] = useState([]);
+  const [filteredList, setFilter] = useState([]);
+  const [refresh, setRefresh] = useState(false);
+
+  const Cust = useCallback(async () => {
+    let customersData = await API.graphql(
+      graphqlOperation(listCustomers, {
+        filter: {
+          company: { eq: company },
+        },
+      })
+    );
+    setCustomers(customersData.data.listCustomers.items);
+    setFilter(customersData.data.listCustomers.items);
+    setRefresh(false);
+  }, [company]);
+
+  const filterCustomer = (event) => {
+    const query = event.target.value;
+    let customersAct = [...customers];
+    customersAct = customersAct.filter((customer) => {
+      return (
+        (customer["name"] + " " + customer["lastname"])
+          .toLowerCase()
+          .indexOf(query.toLowerCase()) !== -1
+      );
+    });
+    setFilter(customersAct);
+  };
+
+  useEffect(() => {
+    Cust();
+  }, [Cust,refresh]);
         return (
             
             <div className="container">
@@ -51,7 +59,7 @@ const CustomersContainer= ({company})=> {
                         </thead>
                                 {filteredList.map((customer) => (
                                 <tbody key={customer.id}>
-                                <CustomerCard customer={customer} />
+                                <CustomerCard customer={customer} onEdit={setRefresh} />
                                 </tbody>
                                         ))}
                     </table>

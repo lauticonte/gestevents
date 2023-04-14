@@ -20,8 +20,11 @@ Amplify.configure(aws_exports);
 //Setup components
 
 function App({ signOut, user }) { 
-  const [userFind,setUser] = useState("");
+  const [userFind,setUserFind] = useState(null);
+  const [loading,setLoading] = useState(true);
+  const [userCreation,setUserCreation] = useState(false);
   const findUser = async (id) => {
+        setLoading(true)
         let usersData = await API.graphql(graphqlOperation(listUsers,
             {
                 filter: {
@@ -31,19 +34,26 @@ function App({ signOut, user }) {
             }
             )
             );
-    setUser(usersData.data.listUsers.items)
+    if (usersData.data.listUsers.items.length === 0) {
+      setUserFind(null)
+    } else {
+      setUserFind(usersData.data.listUsers.items)
+    }
+    setLoading(false)
   }
   useEffect(() => {
   findUser((user.attributes['sub']))
-  }, [])
+  console.log("Hola")
+  }, [userCreation])
   return (
     <div className="App">
-      { userFind === "" ?  <CreateUser id={user.attributes['sub']}/> : <div>
+      {loading ? <div>Loading...</div> : <>
+      { userFind === null ?  <CreateUser id={user.attributes['sub']} act={setUserCreation}/> : <div>
       <header className="App-header">
       <NavigationBar signOut={signOut} user={user}/>
       </header>
       <div style={styles.container}>
-        <Heading level={3}>{userFind[0].name} {userFind[0].lastname} from {userFind[0].company}</Heading>
+        <Heading level={3}>{userFind[0].name} {userFind[0].lastname} de {userFind[0].company}</Heading>
       </div>
         <Routes>
           <Route path="/createCustomer" element={<CreateCustomer company={userFind[0].company}/>} />
@@ -51,11 +61,12 @@ function App({ signOut, user }) {
           <Route path="/createEvent" element={<CreateEvent company={userFind[0].company}/>} />
           <Route path="/allEvents" element={<EventsContainer company={userFind[0].company}/>} />
           <Route path="/userEdit" element={<UserEdit id={user.attributes['sub']}/>} />
-          <Route path="/" element={<div></div>} />
+          <Route path="/" element={<EventsContainer company={userFind[0].company}/>} />
         </Routes>
       </div>
       
         }
+        </>}
     </div>
   );
 }

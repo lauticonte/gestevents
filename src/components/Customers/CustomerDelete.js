@@ -2,7 +2,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import { deleteCustomer } from "../../graphql/mutations";
 import { deleteEvent } from "../../graphql/mutations";
 import { listEvents } from "../../graphql/queries";
-const CustomerDelete = async (customer_id) => {
+const CustomerDelete = async (customer_id,setRefresh) => {
     console.log("Delete customer", customer_id);
     // delete the customer using the customer id and graphql operations
     try{
@@ -33,7 +33,7 @@ const CustomerDelete = async (customer_id) => {
     }catch(error){
         console.log("Error al eliminar cliente de la db:",error)
     }
-
+    setRefresh(true)
 }
 
 export default CustomerDelete

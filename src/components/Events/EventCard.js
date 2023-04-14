@@ -6,7 +6,7 @@ import { listCustomers } from "../../graphql/queries";
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 import EventEdit from "./EventEdit";
-const delEvent = async (event_id) => {
+const delEvent = async (event_id,onEdit) => {
     console.log("Delete event", event_id);
     //delete the event using the event id and graphql operations
     try{
@@ -16,8 +16,9 @@ const delEvent = async (event_id) => {
     }catch(error){
         console.log("Error al eliminar evento de la db:",error)
     }
+    onEdit(true)
 }
-const EventCard = ({Event})=>{
+const EventCard = ({Event,onEdit})=>{
     const [open, setOpen] = useState(false);
     const [customer, setCustomer] = useState("");
     const getCustomer = async (customerID) => {
@@ -52,13 +53,13 @@ const EventCard = ({Event})=>{
                     <td>{Event.observation}</td>
 
         <td> <Button onClick={() => setOpen(!open)} aria-controls="example-collapse-text" aria-expanded={open}>Editar</Button></td>
-        <td> <button className="btn btn-danger" onClick={()=>{delEvent(Event.id)}}>Eliminar</button></td>
+        <td> <button className="btn btn-danger" onClick={()=>{delEvent(Event.id,onEdit)}}>Eliminar</button></td>
         </tr>
         { open ? <tr>
             <td colSpan="10">
         <Collapse in={open}>
             <div id="example-collapse-text">
-                <EventEdit event={Event} company={Event.company}/>
+                <EventEdit event={Event} company={Event.company} onEdit={onEdit}/>
             </div>
           </Collapse>
           </td>

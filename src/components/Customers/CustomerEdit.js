@@ -11,8 +11,9 @@ const updCustomer = async (customerToUpd) => {
     }catch(error){
     console.log("Error al modificar al cliente",error)
     }
+    
 }
-const CustomerEdit = ({customer}) =>{
+const CustomerEdit = ({customer,onEdit}) =>{
     const [newCustomer, setnewCustomer] = useState({['id']:customer.id})
     
     const onChange = (e) => {
@@ -21,6 +22,7 @@ const CustomerEdit = ({customer}) =>{
     const onSubmit = (e) => {
         e.preventDefault();
         updCustomer(newCustomer);
+        onEdit(true)
     }
 
     return(

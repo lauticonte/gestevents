@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { API, graphqlOperation } from "aws-amplify";
 import { listEvents } from "../../graphql/queries";
 import EventCard from "../Events/EventCard";
@@ -6,8 +6,9 @@ import EventCard from "../Events/EventCard";
 const EventsContainer= ({company})=> {
     const [events, setEvents] = useState([]);
     const [filteredList, setFilter] = useState([]);
+    const [refresh, setRefresh] = useState(false);
 
-    const EventsList = async () => {
+    const EventsList = useCallback(async () => {
         let eventsData = await API.graphql(graphqlOperation(listEvents,
             {
                 filter: {
@@ -17,8 +18,9 @@ const EventsContainer= ({company})=> {
             }));
         setEvents(eventsData.data.listEvents.items)
         setFilter(eventsData.data.listEvents.items)
+        setRefresh(false)
         console.log("Hola")
-    }
+    }, [company]);
 
     const filterEvent = (event) => {
         const query = event.target.value
@@ -30,7 +32,7 @@ const EventsContainer= ({company})=> {
     }
     useEffect(()=>{
         EventsList()
-    }, []);
+    }, [EventsList,refresh]);
         return (
             
             <div className="container">
@@ -56,7 +58,7 @@ const EventsContainer= ({company})=> {
             </thead>
                 {filteredList.map((Event) => (
                 <tbody key={Event.id}>
-                  <EventCard Event={Event} />
+                  <EventCard Event={Event} onEdit={setRefresh} />
                 </tbody>
                         ))}
         </table>

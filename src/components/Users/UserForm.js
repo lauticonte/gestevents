@@ -15,6 +15,7 @@ const AddUser = async (newUser)=>{
     }catch(error){
         console.log("Error al agregar al usuario a la db:",error)
     }
+    
 }
 
 export default class CreateUser extends Component {
@@ -43,6 +44,7 @@ export default class CreateUser extends Component {
             companycuit: this.state.companycuit
         };
         AddUser(user);
+        this.props.act(true);
     };
     render() {
         return (
