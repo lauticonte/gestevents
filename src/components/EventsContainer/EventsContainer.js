@@ -19,7 +19,6 @@ const EventsContainer= ({company})=> {
         setEvents(eventsData.data.listEvents.items)
         setFilter(eventsData.data.listEvents.items)
         setRefresh(false)
-        console.log("Hola")
     }, [company]);
 
     const filterEvent = (event) => {

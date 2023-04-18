@@ -43,7 +43,7 @@ function App({ signOut, user }) {
   }
   useEffect(() => {
   findUser((user.attributes['sub']))
-  console.log("Hola")
+  console.log("hola")
   }, [userCreation])
   return (
     <div className="App">
@@ -60,7 +60,7 @@ function App({ signOut, user }) {
           <Route path="/allCustomers" element={<CustomersContainer company={userFind[0].company}/>} />
           <Route path="/createEvent" element={<CreateEvent company={userFind[0].company}/>} />
           <Route path="/allEvents" element={<EventsContainer company={userFind[0].company}/>} />
-          <Route path="/userEdit" element={<UserEdit id={user.attributes['sub']}/>} />
+          <Route path="/userEdit" element={<UserEdit id={user.attributes['sub']} toEdit={userCreation} onEdit={setUserCreation}/>} />
           <Route path="/" element={<EventsContainer company={userFind[0].company}/>} />
         </Routes>
       </div>

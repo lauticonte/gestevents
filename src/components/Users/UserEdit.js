@@ -3,17 +3,21 @@ import {useEffect, useState} from 'react';
 import { updateUser } from '../../graphql/mutations';
 import { listUsers } from '../../graphql/queries';
 import { API, graphqlOperation } from 'aws-amplify';
-const updUser = async (userToUpd) => {
+const updUser = async (userToUpd,onEdit,state) => {
     try{await API.graphql(
         graphqlOperation(updateUser, { input: userToUpd })
     );
         console.log("Se modifico al usuario")
+        onEdit(!state)
     }catch(error){
     console.log("Error al modificar al usuario",error)
     }
+
 }
-const UserEdit = ({id}) =>{
+const UserEdit = ({id,toEdit,onEdit}) =>{
     const [user, setnewUser] = useState({})
+    const [userToUpd, setuserToUpd] = useState({})
+    const [update,setUpdate] = useState(toEdit)
     const findUser = async (id) => {
         let usersData = await API.graphql(graphqlOperation(listUsers,
             {
@@ -25,17 +29,19 @@ const UserEdit = ({id}) =>{
             )
             );
     setnewUser(usersData.data.listUsers.items[0])
+    setuserToUpd({...userToUpd, ['id']:usersData.data.listUsers.items[0].id})
     }
     useEffect(() => {
         findUser(id)
     }, [])
     
     const onChange = (e) => {
-        setnewUser({...user, [e.target.name]: e.target.value})
+        setuserToUpd({...userToUpd, [e.target.name]: e.target.value})
     }
     const onSubmit = (e) => {
         e.preventDefault();
-        updUser(user);
+        updUser(userToUpd,onEdit,update);
+
     }
 
     return(
@@ -73,7 +79,7 @@ const UserEdit = ({id}) =>{
                                 placeholder="Nombre de la organización"
                                 name="company"
                                 defaultValue={user.company}
-                                onChange={(e)=>{onChange(e)}}
+                                disabled
                                 
                             />
                     </Form.Group>
@@ -85,8 +91,7 @@ const UserEdit = ({id}) =>{
                                 placeholder="Cuit de la organización"
                                 name="companycuit"
                                 defaultValue={user.companycuit}
-                                onChange={(e)=>{onChange(e)}}
-                                
+                                disabled
                             />
                     </Form.Group>
                     </Row>
